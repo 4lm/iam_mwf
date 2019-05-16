@@ -1,12 +1,12 @@
 /**
  * Created by master on 17.02.16.
  */
-import {mwf} from "./Main.js";
-import {mwfUtils} from "./Main.js";
-import {EntityManager} from "./Main.js";
-import {GenericCRUDImplLocal} from "./Main.js";
-import {GenericCRUDImplRemote} from "./Main.js";
-import {entities} from "./Main.js";
+import { mwf } from "./Main.js";
+import { mwfUtils } from "./Main.js";
+import { EntityManager } from "./Main.js";
+import { GenericCRUDImplLocal } from "./Main.js";
+import { GenericCRUDImplRemote } from "./Main.js";
+import { entities } from "./Main.js";
 
 class MyApplication extends mwf.Application {
 
@@ -40,6 +40,6 @@ class MyApplication extends mwf.Application {
 }
 
 const application = new MyApplication();
-export {application as default}
+export { application as default }
 
 

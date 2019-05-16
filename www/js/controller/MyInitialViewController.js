@@ -2,8 +2,8 @@
  * @author Jörn Kreutel
  */
 
-import {mwf} from "../Main.js";
-import {entities} from "../Main.js";
+import { mwf } from "../Main.js";
+import { entities } from "../Main.js";
 
 export default class MyInitialViewController extends mwf.ViewController {
 

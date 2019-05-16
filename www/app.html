@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>MY MWF APP</title>
     <!-- this tag avoids scaling the view on display -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" />
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <!-- for pwa, we may include the manifest
     <link rel="manifest" href="pwa/webapp-manifest.json"> -->
     <!-- load the styles -->
-    <link rel="stylesheet" href="lib/css/normalize.css"/>
-    <link rel="stylesheet" href="lib/css/mwf.css"/>
-    <link rel="stylesheet" href="lib/css/mwfIcons.css"/>
+    <link rel="stylesheet" href="lib/css/normalize.css" />
+    <link rel="stylesheet" href="lib/css/mwf.css" />
+    <link rel="stylesheet" href="lib/css/mwfIcons.css" />
     <!-- the application specific style -->
-    <link rel="stylesheet" href="css/mystyle.css"/>
+    <link rel="stylesheet" href="css/mystyle.css" />
     <!-- TODO: comment-in if mapviews shall be used. It seems that libs and css need to be accessed online rather than be provided locally, there is also some issue when using leaflet+offline manifest... -->
     <!--
         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"/>
@@ -26,31 +27,33 @@
     <script type="module" src="js/Main.js"></script>
 </head>
 <!-- TODO: change the application name if it is adapted -->
+
 <body data-mwf-application="MyApplication" class="mwf-loading-app">
 
-<!-- TODO-REPEATED: add new views here -->
-<div class="mwf-view mwf-view-initial mwf-styling" data-mwf-viewcontroller="MyInitialViewController">
-    <header>
-        <button class="mwf-imgbutton mwf-img-sandwich mwf-left-align"></button>
-        <h1 class="mwf-left-align mwf-right-fill">Medien</h1>
-        <button class="mwf-imgbutton mwf-img-plus mwf-right-align"></button>
-    </header>
-    <main class="mwf-scrollview">
-        <ul class="mwf-listview">
-            <li class="mwf-listitem mwf-li-title-subtitle">
-                <img class="mwf-left-align" src="https://placeimg.com/100/100/city">
-                <div class="mwf-li-titleblock mwf-right-fill">
-                    <h2>lorem ipsum</h2>
-                    <h3>dolor sit amet</h3>
-                </div>
-                <button class="mwf-imgbutton mwf-img-options-vertical mwf-right-align"></button>
-            </li>
-        </ul>
-    </main>
-    <footer>
-        <button class="mwf-imgbutton mwf-img-refresh mwf-right-align"></button>
-    </footer>
-</div>
+    <!-- TODO-REPEATED: add new views here -->
+    <div class="mwf-view mwf-view-initial mwf-styling" data-mwf-viewcontroller="MyInitialViewController">
+        <header>
+            <button class="mwf-imgbutton mwf-img-sandwich mwf-left-align"></button>
+            <h1 class="mwf-left-align mwf-right-fill">Medien</h1>
+            <button class="mwf-imgbutton mwf-img-plus mwf-right-align"></button>
+        </header>
+        <main class="mwf-scrollview">
+            <ul class="mwf-listview">
+                <li class="mwf-listitem mwf-li-title-subtitle">
+                    <img class="mwf-left-align" src="https://placeimg.com/100/100/city">
+                    <div class="mwf-li-titleblock mwf-right-fill">
+                        <h2>lorem ipsum</h2>
+                        <h3>dolor sit amet</h3>
+                    </div>
+                    <button class="mwf-imgbutton mwf-img-options-vertical mwf-right-align"></button>
+                </li>
+            </ul>
+        </main>
+        <footer>
+            <button class="mwf-imgbutton mwf-img-refresh mwf-right-align"></button>
+        </footer>
+    </div>
 
 </body>
+
 </html>

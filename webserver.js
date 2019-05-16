@@ -43,7 +43,7 @@ if (multitenantsEnabled) {
 /****************************************************************************
  * the top level request processing logic including handling of multitenancy
  ****************************************************************************/
-var application = function(req, res) {
+var application = function (req, res) {
     var path = url.parse(req.url).pathname;
     var origpath = path;
 
@@ -102,14 +102,14 @@ var application = function(req, res) {
                             path = "/" + path;
                         }
                         // MULTITENANT: from here on, continue processing as before without multitenancy...
-                        handleRequest(req,res,path,tenant);
+                        handleRequest(req, res, path, tenant);
                     }
                 }
             }
         });
     }
     else {
-        handleRequest(req,res,path);
+        handleRequest(req, res, path);
     }
 
     // exception handling, see http://stackoverflow.com/questions/5999373/how-do-i-prevent-node-js-from-crashing-try-catch-doesnt-work
@@ -129,7 +129,7 @@ var application = function(req, res) {
 /***********************************************************************************
  * main request handling branching between api request and static resource requests
  ***********************************************************************************/
-function handleRequest(req,res,path,tenant) {
+function handleRequest(req, res, path, tenant) {
 
     console.log((tenant ? tenant.name : "") + ".onHttpRequest(): trying to serve path: " + path);
 
@@ -169,28 +169,28 @@ function handleRequest(req,res,path,tenant) {
 
             // here we distinguish between uploaded content and other static resources (in order to allow for a different implementation of serveStaticResource(), e.g. be accessing some external file server
             if (path.startsWith("/content")) {
-                serveUploadedContent(req,res,path,tenant);
+                serveUploadedContent(req, res, path, tenant);
             }
             else {
-                serveStaticResource(req,res,path,tenant);
+                serveStaticResource(req, res, path, tenant);
             }
         }
     }
 }
 
-function serveUploadedContent(req,res,path,tenant) {
+function serveUploadedContent(req, res, path, tenant) {
     console.log((tenant ? tenant.name : "") + ".onHttpRequest(): serve uploaded content: " + path);
-    doServeStaticResource(req,res,path,tenant);
+    doServeStaticResource(req, res, path, tenant);
 }
 
 // MULTITENANT: provide an alternative implementation of this function if tenants' applications are not provided via the local filesystem, but, e.g., via an external file server
-function serveStaticResource(req,res,path,tenant) {
-    doServeStaticResource(req,res,path,tenant);
+function serveStaticResource(req, res, path, tenant) {
+    doServeStaticResource(req, res, path, tenant);
 }
 
-function doServeStaticResource(req,res,path,tenant) {
-// serveable resources will be put in the webcontent directory -- the callback will be passed the data read out from the file being accessed
-// MULTITENANT: we will serve the resources from the tenant's subdirectory within the www webspace or directly from there if multitenancy is not enabled
+function doServeStaticResource(req, res, path, tenant) {
+    // serveable resources will be put in the webcontent directory -- the callback will be passed the data read out from the file being accessed
+    // MULTITENANT: we will serve the resources from the tenant's subdirectory within the www webspace or directly from there if multitenancy is not enabled
     fs.readFile(__dirname + "/www/" + (tenant ? tenant.id + "/" : "") + path, function (err, data) {
         // check whether we have got an error retrieving the resource: create a 404 error, assuming that a wrong uri was used
         if (err) {
@@ -222,8 +222,8 @@ console.log("HTTP server running at http://" + ip + ":" + port);
 // providing https access (e.g. for testing service workers), following https://aghassi.github.io/ssl-using-express-4/
 if (httpsEnabled) {
 
-// this might no be the most elegant solution to avoid the event emitter error message..., see http://stackoverflow.com/questions/9768444/possible-eventemitter-memory-leak-detected
-// here, we set the credentials
+    // this might no be the most elegant solution to avoid the event emitter error message..., see http://stackoverflow.com/questions/9768444/possible-eventemitter-memory-leak-detected
+    // here, we set the credentials
     var key = fs.readFileSync("njsimpl/https.key").toString();
     var cert = fs.readFileSync("njsimpl/https.cert").toString();
 
@@ -232,7 +232,7 @@ if (httpsEnabled) {
         return;
     }
 
-    var sslOptions = (localPassphrase == "NONE") ? {key: key, cert: cert} : {
+    var sslOptions = (localPassphrase == "NONE") ? { key: key, cert: cert } : {
         key: key,
         cert: cert,
         passphrase: localPassphrase

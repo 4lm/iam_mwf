@@ -5,8 +5,8 @@
  */
 
 
-import {mwfUtils} from "../Main.js";
-import {EntityManager} from "../Main.js";
+import { mwfUtils } from "../Main.js";
+import { EntityManager } from "../Main.js";
 
 /*************
  * example entity

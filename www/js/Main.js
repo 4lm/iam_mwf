@@ -18,14 +18,14 @@
  */
 
 // import the framework
-import {mwf} from "../lib/js/framework-modules.js";
-import {mwfUtils} from "../lib/js/framework-modules.js";
-import {EntityManager} from "../lib/js/framework-modules.js";
-import {GenericCRUDImplLocal} from "../lib/js/framework-modules.js";
-import {GenericCRUDImplRemote} from "../lib/js/framework-modules.js";
+import { mwf } from "../lib/js/framework-modules.js";
+import { mwfUtils } from "../lib/js/framework-modules.js";
+import { EntityManager } from "../lib/js/framework-modules.js";
+import { GenericCRUDImplLocal } from "../lib/js/framework-modules.js";
+import { GenericCRUDImplRemote } from "../lib/js/framework-modules.js";
 
 // import generic application components
-import {GenericDialogTemplateViewController} from "../lib/js/framework-modules.js";
+import { GenericDialogTemplateViewController } from "../lib/js/framework-modules.js";
 /* TODO: only include the mapHolder if maps are actually used. Do not forget to export it below */
 // import {mapHolder} from "../lib/js/framework-modules.js";
 
