@@ -20,5 +20,19 @@ export class MyEntity extends EntityManager.Entity {
 
 }
 
+export class MediaItem extends EntityManager.Entity {
 
+    constructor(title, src, contentType) {
+        super();
+        this.title = title;
+        this.description = "";
+        this.added = Date.now();
+        this.src = src;
+        this.srcType = null;
+        this.contentType = contentType;
+    }
+
+    // TODO: Add getter methods, from tutorial.pdf on page 24
+
+}
 
