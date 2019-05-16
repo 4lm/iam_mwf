@@ -10,6 +10,12 @@ export default class ListviewViewController extends mwf.ViewController {
         super();
 
         console.log("ListviewViewController()");
+
+        this.items = [
+            new entities.MediaItem('m1','https://placeimg.com/100/100/city'),
+            new entities.MediaItem('m2','https://placeimg.com/200/150/music'),
+            new entities.MediaItem('m2','https://placeimg.com/150/200/culture')
+        ]
     }
 
     /*
