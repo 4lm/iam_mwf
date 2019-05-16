@@ -14,7 +14,8 @@ export default class ListviewViewController extends mwf.ViewController {
         this.items = [
             new entities.MediaItem('m1','https://placeimg.com/100/100/city'),
             new entities.MediaItem('m2','https://placeimg.com/200/150/music'),
-            new entities.MediaItem('m2','https://placeimg.com/150/200/culture')
+            new entities.MediaItem('m3','https://placeimg.com/150/200/culture'),
+            new entities.MediaItem('m4','https://placeimg.com/150/200/culture')
         ]
     }
 
@@ -23,8 +24,9 @@ export default class ListviewViewController extends mwf.ViewController {
      */
     async oncreate() {
         // TODO: do databinding, set listeners, initialise the view
+        console.log("oncreate(): root is:", this.root);
 
-
+        this.initialiseListview(this.items);
         // call the superclass once creation is done
         super.oncreate();
     }
@@ -35,6 +37,9 @@ export default class ListviewViewController extends mwf.ViewController {
      */
     bindListItemView(viewid, itemview, item) {
         // TODO: implement how attributes of item shall be displayed in itemview
+        itemview.root.querySelector("h2").textContent = item.title;
+        itemview.root.getElementsByTagName("h3")[0].textContent = item.added;
+        itemview.root.querySelector("img").src = item.src;
     }
 
     /*
