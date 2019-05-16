@@ -1,1 +1,5 @@
 /* TODO: add any application specific styling here */
+
+#mediaOverview main ul li img {
+    object-fit: cover;
+}
