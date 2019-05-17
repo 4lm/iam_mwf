@@ -12,10 +12,10 @@ export default class ListviewViewController extends mwf.ViewController {
         console.log("ListviewViewController()");
 
         this.items = [
-            new entities.MediaItem('m1','https://placeimg.com/100/100/city'),
-            new entities.MediaItem('m2','https://placeimg.com/200/150/music'),
-            new entities.MediaItem('m3','https://placeimg.com/150/200/culture'),
-            new entities.MediaItem('m4','https://placeimg.com/150/200/culture')
+            new entities.MediaItem('m1', 'https://placeimg.com/100/100/city'),
+            new entities.MediaItem('m2', 'https://placeimg.com/200/150/music'),
+            new entities.MediaItem('m3', 'https://placeimg.com/150/200/culture'),
+            new entities.MediaItem('m4', 'https://placeimg.com/150/200/culture')
         ]
     }
 
@@ -25,6 +25,11 @@ export default class ListviewViewController extends mwf.ViewController {
     async oncreate() {
         // TODO: do databinding, set listeners, initialise the view
         console.log("oncreate(): root is:", this.root);
+        this.addNewMediaItemElement = this.root.querySelector("#addNewMediaItem");
+
+        this.addNewMediaItemElement.onclick = (() => {
+            this.addToListview(new entities.MediaItem("m new", "https://placeimg.com/100/100/city"));
+        });
 
         this.initialiseListview(this.items);
         // call the superclass once creation is done
