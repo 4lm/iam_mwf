@@ -8,7 +8,6 @@ export default class ListviewViewController extends mwf.ViewController {
 
     constructor() {
         super();
-
         console.log("ListviewViewController()");
 
         this.items = [
@@ -17,6 +16,8 @@ export default class ListviewViewController extends mwf.ViewController {
             new entities.MediaItem('m3', 'https://placeimg.com/150/200/culture'),
             new entities.MediaItem('m4', 'https://placeimg.com/150/200/culture')
         ]
+
+        this.addNewMediaItem = null;
     }
 
     /*
@@ -32,6 +33,7 @@ export default class ListviewViewController extends mwf.ViewController {
         });
 
         this.initialiseListview(this.items);
+        
         // call the superclass once creation is done
         super.oncreate();
     }
