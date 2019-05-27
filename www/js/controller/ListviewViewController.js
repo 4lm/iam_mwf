@@ -57,13 +57,13 @@ export default class ListviewViewController extends mwf.ViewController {
      * for views with listviews: bind a list item to an item view
      * TODO: delete if no listview is used or if databinding uses ractive templates
      */
-    bindListItemView(viewid, itemview, item) {
-        // TODO: implement how attributes of item shall be displayed in itemview
-        const added = new Date(item.added).toLocaleDateString('de-DE', dateOptions);
-        itemview.root.querySelector("h2").textContent = item.title + item._id;
-        itemview.root.getElementsByTagName("h3")[0].textContent = added;
-        itemview.root.querySelector("img").src = item.src;
-    }
+    // bindListItemView(viewid, itemview, item) {
+    //     // TODO: implement how attributes of item shall be displayed in itemview
+    //     const added = new Date(item.added).toLocaleDateString('de-DE', dateOptions);
+    //     itemview.root.querySelector("h2").textContent = item.title + item._id;
+    //     itemview.root.getElementsByTagName("h3")[0].textContent = added;
+    //     itemview.root.querySelector("img").src = item.src;
+    // }
 
     /*
      * for views with listviews: react to the selection of a listitem
