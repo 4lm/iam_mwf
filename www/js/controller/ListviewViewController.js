@@ -5,6 +5,12 @@ import { mwf } from "../Main.js";
 import { entities } from "../Main.js";
 import { GenericCRUDImplLocal } from "../Main.js";
 
+const dateOptions = {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+};
+
 export default class ListviewViewController extends mwf.ViewController {
 
     constructor() {
@@ -12,7 +18,7 @@ export default class ListviewViewController extends mwf.ViewController {
         console.log("ListviewViewController()");
         this.addNewMediaItem = null;
         this.resetDatabaseElement = null;
-        
+
         this.crudops = GenericCRUDImplLocal.newInstance("MediaItem");
     }
 
@@ -53,8 +59,9 @@ export default class ListviewViewController extends mwf.ViewController {
      */
     bindListItemView(viewid, itemview, item) {
         // TODO: implement how attributes of item shall be displayed in itemview
+        const added = new Date(item.added).toLocaleDateString('de-DE', dateOptions);
         itemview.root.querySelector("h2").textContent = item.title + item._id;
-        itemview.root.getElementsByTagName("h3")[0].textContent = item.added;
+        itemview.root.getElementsByTagName("h3")[0].textContent = added;
         itemview.root.querySelector("img").src = item.src;
     }
 
