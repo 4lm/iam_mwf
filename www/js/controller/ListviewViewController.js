@@ -80,6 +80,7 @@ export default class ListviewViewController extends mwf.ViewController {
      */
     onListItemMenuItemSelected(option, listitem, listview) {
         // TODO: implement how selection of option for listitem shall be handled
+        super.onListItemElementSelected(option, listitem, listview);
     }
 
     /*
@@ -100,5 +101,17 @@ export default class ListviewViewController extends mwf.ViewController {
         // TODO: check from which view, and possibly with which status, we are returning, and handle returnValue accordingly
     }
 
+    deleteItem(item) {
+        this.crudops.delete(item._id).then(() => {
+            this.removeFromListview(item._id);
+        });
+    }
+
+    editItem(item) {
+        item.title = (item.title + item.title);
+        this.crudops.update(item._id, item).then(() => {
+            this.updateInListview(item._id, item);
+        });
+    }
 }
 
