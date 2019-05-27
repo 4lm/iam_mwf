@@ -3,13 +3,7 @@
  */
 import { mwf } from "../Main.js";
 import { entities } from "../Main.js";
-import { GenericCRUDImplLocal } from "../Main.js";
 
-const dateOptions = {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit'
-};
 
 export default class ListviewViewController extends mwf.ViewController {
 
@@ -18,8 +12,6 @@ export default class ListviewViewController extends mwf.ViewController {
         console.log("ListviewViewController()");
         this.addNewMediaItem = null;
         this.resetDatabaseElement = null;
-
-        this.crudops = GenericCRUDImplLocal.newInstance("MediaItem");
     }
 
     /*
@@ -32,11 +24,12 @@ export default class ListviewViewController extends mwf.ViewController {
         this.resetDatabaseElement = this.root.querySelector("#resetDatabase");
 
         this.addNewMediaItemElement.onclick = (() => {
-            this.crudops
-            .create(new entities.MediaItem(
-                    "m",
-                    "https://placeimg.com/100/100/city"))
-            .then((created) => this.addToListview(created));
+            // this.crudops
+            // .create(new entities.MediaItem(
+            //         "m",
+            //         "https://placeimg.com/100/100/city"))
+            // .then((created) => this.addToListview(created));
+            this.createNewItem();
         });
 
         this.resetDatabaseElement.onclick = (() => {
@@ -45,7 +38,11 @@ export default class ListviewViewController extends mwf.ViewController {
             }
         });
 
-        this.crudops.readAll().then((items) => {
+        // this.crudops.readAll().then((items) => {
+        //     this.initialiseListview(items);
+        // });
+
+        entities.MediaItem.readAll().then((items) => {
             this.initialiseListview(items);
         });
 
@@ -102,16 +99,24 @@ export default class ListviewViewController extends mwf.ViewController {
     }
 
     deleteItem(item) {
-        this.crudops.delete(item._id).then(() => {
-            this.removeFromListview(item._id);
-        });
+        // this.crudops.delete(item._id).then(() => {
+        //     this.removeFromListview(item._id);
+        // });
+        item.delete().then(() => this.removeFromListview(item._id));
     }
 
     editItem(item) {
         item.title = (item.title + item.title);
-        this.crudops.update(item._id, item).then(() => {
-            this.updateInListview(item._id, item);
-        });
+        // this.crudops.update(item._id, item).then(() => {
+        //     this.updateInListview(item._id, item);
+        // });
+        item.update().then(() => this.updateInListview(item._id, item));
+    }
+
+    createNewItem() {
+        const url = "https://placeimg.com/100/100/city";
+        const newItem = new entities.MediaItem("m", url);
+        newItem.create().then(() => this.addToListview(newItem));
     }
 }
 
