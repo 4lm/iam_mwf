@@ -3,21 +3,17 @@
  */
 import { mwf } from "../Main.js";
 import { entities } from "../Main.js";
+import { GenericCRUDImplLocal } from "../Main.js";
 
 export default class ListviewViewController extends mwf.ViewController {
 
     constructor() {
         super();
         console.log("ListviewViewController()");
-
-        this.items = [
-            new entities.MediaItem('m1', 'https://placeimg.com/100/100/city'),
-            new entities.MediaItem('m2', 'https://placeimg.com/200/150/music'),
-            new entities.MediaItem('m3', 'https://placeimg.com/150/200/culture'),
-            new entities.MediaItem('m4', 'https://placeimg.com/150/200/culture')
-        ]
-
         this.addNewMediaItem = null;
+        this.resetDatabaseElement = null;
+        
+        this.crudops = GenericCRUDImplLocal.newInstance("MediaItem");
     }
 
     /*
@@ -27,13 +23,26 @@ export default class ListviewViewController extends mwf.ViewController {
         // TODO: do databinding, set listeners, initialise the view
         console.log("oncreate(): root is:", this.root);
         this.addNewMediaItemElement = this.root.querySelector("#addNewMediaItem");
+        this.resetDatabaseElement = this.root.querySelector("#resetDatabase");
 
         this.addNewMediaItemElement.onclick = (() => {
-            this.addToListview(new entities.MediaItem("m new", "https://placeimg.com/100/100/city"));
+            this.crudops
+            .create(new entities.MediaItem(
+                    "m",
+                    "https://placeimg.com/100/100/city"))
+            .then((created) => this.addToListview(created));
         });
 
-        this.initialiseListview(this.items);
-        
+        this.resetDatabaseElement.onclick = (() => {
+            if (confirm("Soll die Datenbank wirklich zurückgesetzt werden?")) {
+                indexedDB.deleteDatabase("mwftutdb");
+            }
+        });
+
+        this.crudops.readAll().then((items) => {
+            this.initialiseListview(items);
+        });
+
         // call the superclass once creation is done
         super.oncreate();
     }
@@ -44,7 +53,7 @@ export default class ListviewViewController extends mwf.ViewController {
      */
     bindListItemView(viewid, itemview, item) {
         // TODO: implement how attributes of item shall be displayed in itemview
-        itemview.root.querySelector("h2").textContent = item.title;
+        itemview.root.querySelector("h2").textContent = item.title + item._id;
         itemview.root.getElementsByTagName("h3")[0].textContent = item.added;
         itemview.root.querySelector("img").src = item.src;
     }
@@ -55,7 +64,7 @@ export default class ListviewViewController extends mwf.ViewController {
      */
     onListItemSelected(listitem, listview) {
         // TODO: implement how selection of listitem shall be handled
-        alert("Element " + listitem.title + " wurde ausgewählt!");
+        alert("Element " + listitem.title + listitem._id + " wurde ausgewählt!");
     }
 
     /*
