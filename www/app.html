@@ -38,15 +38,16 @@
             <button class="mwf-imgbutton mwf-img-plus mwf-right-align" id="addNewMediaItem"></button>
         </header>
         <main class="mwf-scrollview">
-            <ul class="mwf-listview" data-mwf-listitem-view="myapp-listitem"
-            data-mwf-listitem-menu="meditaItemMenu">
-                <li class="mwf-listitem mwf-li-title-subtitle mwf-template mwf-databind" data-mwf-templatename="myapp-listitem">
+            <ul class="mwf-listview" data-mwf-listitem-view="myapp-listitem" data-mwf-listitem-menu="meditaItemMenu">
+                <li class="mwf-listitem mwf-li-title-subtitle mwf-template mwf-databind"
+                    data-mwf-templatename="myapp-listitem">
                     <img class="mwf-left-align" src="{{src}}?t={{_id}}">
                     <div class="mwf-li-titleblock mwf-right-fill">
                         <h2>{{title}} {{_id}}</h2>
                         <h3>{{addedDateString}}</h3>
                     </div>
-                    <button class="mwf-imgbutton mwf-img-options-vertical mwf-right-align mwf-listitem-menu-control"></button>
+                    <button
+                        class="mwf-imgbutton mwf-img-options-vertical mwf-right-align mwf-listitem-menu-control"></button>
                 </li>
             </ul>
         </main>
@@ -54,21 +55,36 @@
             <button class="mwf-imgbutton mwf-img-refresh mwf-right-align"></button>
         </footer>
     </div>
-    <div data-mwf-templatename="meditaItemMenu"
-         class="mwf-listitem-menu mwf-template mwf-databind mwf-dialog
+    <div data-mwf-templatename="meditaItemMenu" class="mwf-listitem-menu mwf-template mwf-databind mwf-dialog
          mwf-popup">
-         <header>
-             <h2 class="mwf-dyncontent">{{title}} {{_id}}</h2>
-         </header>
-         <main>
-             <ul>
-                 <li class="mwf-li-singletitle mwf-menu-item"
-                     data-mwf-targetaction="deleteItem">Löschen</li>
-                 <li class="mwf-li-singletitle mwf-menu-item"
-                     data-mwf-targetaction="editItem">Editieren</li>
-             </ul>
-         </main>
-         
+        <header>
+            <h2 class="mwf-dyncontent">{{title}} {{_id}}</h2>
+        </header>
+        <main>
+            <ul>
+                <li class="mwf-li-singletitle mwf-menu-item" data-mwf-targetaction="deleteItem">Löschen</li>
+                <li class="mwf-li-singletitle mwf-menu-item" data-mwf-targetaction="editItem">Editieren</li>
+            </ul>
+        </main>
+    </div>
+    <div class="mwf-dialog mwf-popup mwf-template mwf-databind mwf-view-component"
+        data-mwf-viewcontroller="GenericDialogTemplateViewController" data-mwf-templatename="mediaItemDialog">
+        <main>
+            <h2>{{#if item.created}}Medium editieren{{else}}Neues
+                Medium{{/if}}</h2>
+            <form id="itemEditForm" on-submit="submitForm">
+                <input name="title" autocomplete="off" type="text" class="mwf-autofocus" placeholder="Titel"
+                    required="required" value="{{item.title}}" />
+                <div class="mwf-buttonbar">
+                    <button class="mwf-left-align mwf-button"
+                    disabled="{{#unless item.created}}mwf-disabled{{/unless}}"
+                        type="button" on-click="deleteItem">Löschen</button>
+                    <input class="mwf-button-prio mwf-right-align
+                    mwf-button" type="submit" value="{{#if
+                        item.created}}Ändern{{else}}Hinzufügen{{/if}}" />
+                </div>
+            </form>
+        </main>
     </div>
 
 </body>
