@@ -31,7 +31,7 @@
 <body data-mwf-application="MyApplication" class="mwf-loading-app">
 
     <!-- TODO-REPEATED: add new views here -->
-    <div class="mwf-view mwf-view-initial" data-mwf-viewcontroller="ListviewViewController" id="mediaOverview">
+    <div class="mwf-view mwf-view-initial mwf-styling mwf-dialog-shown" data-mwf-viewcontroller="ListviewViewController" id="mediaOverview">
         <header>
             <button class="mwf-imgbutton mwf-img-sandwich mwf-left-align" id="resetDatabase"></button>
             <h1 class="mwf-left-align mwf-right-fill">Medien</h1>
@@ -68,7 +68,22 @@
                      data-mwf-targetaction="editItem">Editieren</li>
              </ul>
          </main>
-         
+    </div>
+    <div class="mwf-dialog mwf-popup mwf-template mwf-databind mwf-voew-component mwf-styling mwf-shown" data-mwf-viewcontroller="GenericDialogTemplateViewController" data-mwf-templatename="meditaItemDialog">
+        <main>
+            <h2>Neues Medium</h2>
+            <form id="itemEditForm">
+                <input name="title" autocomplete="off" type="text"
+                       class="mwf-autofocus" placeholder="Titel"
+                       required="required" value=""/>
+                <div class="mwf-buttonbar">
+                    <button class="mwf-left-align mwf-button"
+                    type="button">Löschen</button>
+                    <input class="mwf-button-prio mwf-right-align
+                    mwf-button" type="submit" value="Hinzufügen"/>
+                </div>
+            </form>
+        </main>
     </div>
 
 </body>
