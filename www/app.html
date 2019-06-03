@@ -55,6 +55,7 @@
             <button class="mwf-imgbutton mwf-img-refresh mwf-right-align"></button>
         </footer>
     </div>
+
     <div data-mwf-templatename="meditaItemMenu" class="mwf-listitem-menu mwf-template mwf-databind mwf-dialog
          mwf-popup">
         <header>
@@ -67,6 +68,7 @@
             </ul>
         </main>
     </div>
+
     <div class="mwf-dialog mwf-popup mwf-template mwf-databind mwf-view-component"
         data-mwf-viewcontroller="GenericDialogTemplateViewController" data-mwf-templatename="mediaItemDialog">
         <main>
@@ -76,8 +78,7 @@
                 <input name="title" autocomplete="off" type="text" class="mwf-autofocus" placeholder="Titel"
                     required="required" value="{{item.title}}" />
                 <div class="mwf-buttonbar">
-                    <button class="mwf-left-align mwf-button"
-                    disabled="{{#unless item.created}}mwf-disabled{{/unless}}"
+                    <button class="mwf-left-align mwf-button" disabled="{{#unless item.created}}mwf-disabled{{/unless}}"
                         type="button" on-click="deleteItem">Löschen</button>
                     <input class="mwf-button-prio mwf-right-align
                     mwf-button" type="submit" value="{{#if
@@ -85,6 +86,22 @@
                 </div>
             </form>
         </main>
+    </div>
+
+    <div class="mwf-view" id="mediaReadview">
+        <div class="mwf-template mwf-databind" data-mwf-templatename="mediaReadviewTemplate">
+            <header>
+                <button class="mwf-imgbutton mwf-img-sandwich mwf-left-align"></button>
+                <h1 class="mwf-left-align mwf-right-fill">{{item.title}}</h1>
+                <button class="mwf-imgbutton mwf-img-delete mwf-right-align" on-click="deleteItem"></button>
+            </header>
+            <main class="mwf-scrollview">
+                <img src="{{item.src}}" />
+            </main>
+            <footer>
+                <button class="mwf-back mwf-imgbutton mwf-img-backward"></button>
+            </footer>
+        </div>
     </div>
 
 </body>

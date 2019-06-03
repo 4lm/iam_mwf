@@ -3,3 +3,14 @@
 #mediaOverview main ul li img {
     object-fit: cover;
 }
+
+/* Hide scrollbar */
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 0px;
+}
+
+#mediaReadview img {
+    width: 100%;
+    max-width: 100%;
+}
