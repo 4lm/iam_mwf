@@ -23,16 +23,20 @@ export default class ListviewViewController extends mwf.ViewController {
         this.addNewMediaItemElement = this.root.querySelector("#addNewMediaItem");
         this.resetDatabaseElement = this.root.querySelector("#resetDatabase");
 
+        this.currentCRUDScopeInfo = this.root.querySelector("#currentCRUDScope");
+        this.currentCRUDScopeInfo.innerHTML = this.application.currentCRUDScope;
+
         this.switchCRUDButton = this.root.querySelector("footer .mwf-img-refresh");
         this.switchCRUDButton.onclick = () => {
             const scope = this.application.currentCRUDScope
             const local = this.application.CRUDOPS.LOCAL;
             const remote = this.application.CRUDOPS.REMOTE;
-            alert("current CRUD scope: " + scope)
             if (scope === remote) {
                 this.application.switchCRUD(local);
+                this.currentCRUDScopeInfo.innerHTML = this.application.currentCRUDScope;
             } else {
                 this.application.switchCRUD(remote);
+                this.currentCRUDScopeInfo.innerHTML = this.application.currentCRUDScope;
             }
             entities.MediaItem.readAll().then(items => this.initialiseListview(items));
         }

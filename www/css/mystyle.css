@@ -14,3 +14,13 @@
     width: 100%;
     max-width: 100%;
 }
+
+#currentCRUDScope {
+    display: inline-block;
+    font-size: 12pt;
+    font-weight: normal;
+    font-style: italic;
+    padding-left: 10px;
+    height: 40px;
+    line-height: 40px;
+}
