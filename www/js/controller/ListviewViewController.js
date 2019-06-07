@@ -20,12 +20,12 @@ export default class ListviewViewController extends mwf.ViewController {
     async oncreate() {
         // TODO: do databinding, set listeners, initialise the view
         console.log("oncreate(): root is:", this.root);
-        this.addNewMediaItemElement = this.root.querySelector("#addNewMediaItem");
-        this.resetDatabaseElement = this.root.querySelector("#resetDatabase");
 
+        // Add current CRUD scope (local|remote) to footer 
         this.currentCRUDScopeInfo = this.root.querySelector("#currentCRUDScope");
         this.currentCRUDScopeInfo.innerHTML = this.application.currentCRUDScope;
 
+        // Add CRUD scope (local|remote) switcher 
         this.switchCRUDButton = this.root.querySelector("footer .mwf-img-refresh");
         this.switchCRUDButton.onclick = () => {
             const scope = this.application.currentCRUDScope
@@ -41,6 +41,8 @@ export default class ListviewViewController extends mwf.ViewController {
             entities.MediaItem.readAll().then(items => this.initialiseListview(items));
         }
 
+        // Create and add new media item
+        this.addNewMediaItemElement = this.root.querySelector("#addNewMediaItem");
         this.addNewMediaItemElement.onclick = (() => {
             // this.crudops
             // .create(new entities.MediaItem(
@@ -50,6 +52,9 @@ export default class ListviewViewController extends mwf.ViewController {
             this.createNewItem();
         });
 
+
+        // Reset database
+        this.resetDatabaseElement = this.root.querySelector("#resetDatabase");
         this.resetDatabaseElement.onclick = (() => {
             if (confirm("Soll die Datenbank wirklich zurückgesetzt werden?")) {
                 indexedDB.deleteDatabase("mwftutdb");
