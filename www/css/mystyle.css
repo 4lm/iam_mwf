@@ -24,3 +24,14 @@
     height: 40px;
     line-height: 40px;
 }
+
+.my-long-word-header {
+    padding-left: 10px;
+    max-width: calc(100% - 100px);
+    max-width: -webkit-calc(100% - 100px);
+    overflow: hidden;
+}
+
+.my-long-word-dialog {
+    overflow: hidden;
+}

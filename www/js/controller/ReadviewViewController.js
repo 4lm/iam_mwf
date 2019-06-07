@@ -18,7 +18,9 @@ export default class ReadviewViewController extends mwf.ViewController {
      */
     async oncreate() {
         console.log("ReadviewViewController() -> oncreate():");
+
         // TODO: do databinding, set listeners, initialise the view
+
         const mediaItem = this.args.item;
         console.log(mediaItem);
         this.viewProxy = this.bindElement(
@@ -26,11 +28,17 @@ export default class ReadviewViewController extends mwf.ViewController {
             { item: mediaItem },
             this.root
         ).viewProxy;
-        this.viewProxy.bindAction("deleteItem", (() => {
-            mediaItem.delete().then(() => {
-                this.previousView({ deletedItem: mediaItem });
-            });
-        }));
+
+        // this.viewProxy.bindAction("deleteItem", (() => {
+        //     mediaItem.delete().then(() => {
+        //         this.previousView({ deletedItem: mediaItem });
+        //     });
+        // }));
+        
+        this.deleteItemButton = this.root.querySelector("header .mwf-img-delete");
+        this.deleteItemButton.onclick = (() => {
+            this.deleteItemDialog(mediaItem);
+        });
 
         // call the superclass once creation is done
         super.oncreate();
@@ -78,5 +86,24 @@ export default class ReadviewViewController extends mwf.ViewController {
         // TODO: check from which view, and possibly with which status, we are returning, and handle returnValue accordingly
     }
 
-}
+    deleteItem(item) {
+        item.delete().then(() => this.removeFromListview(item._id));
+    }
 
+    deleteItemDialog(item) {
+        this.showDialog("mediaItemDeleteDialog", {
+            item: item,
+            actionBindings: {
+                cancelDeleteItem: ((event) => {
+                    this.hideDialog();
+                }),
+                deleteItem: ((event) => {
+                    this.deleteItem(item);
+                    this.hideDialog();
+                    this.previousView({ deletedItem: item });
+                })
+            }
+        })
+    }
+
+}
