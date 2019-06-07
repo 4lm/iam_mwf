@@ -12,6 +12,8 @@ class MyApplication extends mwf.Application {
 
     constructor() {
         super();
+
+        this.DBNAME = "mwftutdb";
     }
 
     async oncreate() {
@@ -21,9 +23,10 @@ class MyApplication extends mwf.Application {
         await super.oncreate();
 
         console.log("MyApplication.oncreate(): initialising local database");
+        console.log("DBNAME: " + this.DBNAME);
         // initialise the local database
         // TODO-REPEATED: add new entity types to the array of object store names
-        await GenericCRUDImplLocal.initialiseDB("mwftutdb", 1, ["MyEntity", "MediaItem"]);
+        await GenericCRUDImplLocal.initialiseDB(this.DBNAME, 1, ["MyEntity", "MediaItem"]);
 
         console.log("MyApplication.oncreate(): local database initialised");
 

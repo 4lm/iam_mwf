@@ -28,7 +28,7 @@ export default class ListviewViewController extends mwf.ViewController {
         // Add CRUD scope (local|remote) switcher 
         this.switchCRUDElement = this.root.querySelector("footer .mwf-img-refresh");
         this.switchCRUDElement.onclick = () => {
-            const scope = this.application.currentCRUDScope
+            const scope = this.application.currentCRUDScope;
             const local = this.application.CRUDOPS.LOCAL;
             const remote = this.application.CRUDOPS.REMOTE;
             if (scope === remote) {
@@ -53,11 +53,14 @@ export default class ListviewViewController extends mwf.ViewController {
         });
 
 
-        // Reset database
-        this.resetDatabaseElement = this.root.querySelector("#resetDatabase");
-        this.resetDatabaseElement.onclick = (() => {
-            if (confirm("Soll die Datenbank wirklich zurückgesetzt werden?")) {
-                indexedDB.deleteDatabase("mwftutdb");
+        // Delete IndexedDB
+        this.deleteIndexedDBElement = this.root.querySelector("#deleteIndexedDB");
+        this.deleteIndexedDBElement.onclick = (() => {
+            const scope = this.application.currentCRUDScope;
+            const local = this.application.CRUDOPS.LOCAL;
+            if (scope === local) {
+                const dbname = this.application.DBNAME;
+                this.deleteIndexedDBDialog(dbname);
             }
         });
 
@@ -163,6 +166,22 @@ export default class ListviewViewController extends mwf.ViewController {
                 })
             }
         });
+    }
+
+    deleteIndexedDBDialog(dbname) {
+        this.showDialog("deleteIndexedDBDialog", {
+            dbname: dbname,
+            actionBindings: {
+                cancelDeleteDatabase: ((event) => {
+                    this.hideDialog();
+                }),
+                deleteDatabase: ((event) => {
+                    indexedDB.deleteDatabase(dbname);
+                    this.hideDialog();
+                    this.initialiseListview();
+                })
+            }
+        })
     }
 }
 
