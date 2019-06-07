@@ -19,7 +19,7 @@ export default class ReadviewViewController extends mwf.ViewController {
     async oncreate() {
         console.log("ReadviewViewController() -> oncreate():");
         // TODO: do databinding, set listeners, initialise the view
-        var mediaItem = this.args.item;
+        const mediaItem = this.args.item;
         console.log(mediaItem);
         this.viewProxy = this.bindElement(
             "mediaReadviewTemplate",
