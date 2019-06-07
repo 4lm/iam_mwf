@@ -35,8 +35,8 @@ export default class ReadviewViewController extends mwf.ViewController {
         //     });
         // }));
         
-        this.deleteItemButton = this.root.querySelector("header .mwf-img-delete");
-        this.deleteItemButton.onclick = (() => {
+        this.deleteItemElement = this.root.querySelector("header .mwf-img-delete");
+        this.deleteItemElement.onclick = (() => {
             this.deleteItemDialog(mediaItem);
         });
 

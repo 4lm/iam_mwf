@@ -26,8 +26,8 @@ export default class ListviewViewController extends mwf.ViewController {
         this.currentCRUDScopeInfo.innerHTML = this.application.currentCRUDScope;
 
         // Add CRUD scope (local|remote) switcher 
-        this.switchCRUDButton = this.root.querySelector("footer .mwf-img-refresh");
-        this.switchCRUDButton.onclick = () => {
+        this.switchCRUDElement = this.root.querySelector("footer .mwf-img-refresh");
+        this.switchCRUDElement.onclick = () => {
             const scope = this.application.currentCRUDScope
             const local = this.application.CRUDOPS.LOCAL;
             const remote = this.application.CRUDOPS.REMOTE;
