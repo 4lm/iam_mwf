@@ -22,23 +22,28 @@ export default class ReadviewViewController extends mwf.ViewController {
         // TODO: do databinding, set listeners, initialise the view
 
         const mediaItem = this.args.item;
-        console.log(mediaItem);
+
         this.viewProxy = this.bindElement(
             "mediaReadviewTemplate",
             { item: mediaItem },
             this.root
         ).viewProxy;
 
-        // this.viewProxy.bindAction("deleteItem", (() => {
-        //     mediaItem.delete().then(() => {
-        //         this.previousView({ deletedItem: mediaItem });
-        //     });
-        // }));
-        
-        this.deleteItemElement = this.root.querySelector("header .mwf-img-delete");
-        this.deleteItemElement.onclick = (() => {
-            this.deleteItemDialog(mediaItem);
-        });
+        this.viewProxy.bindAction("deleteItem", (() => {
+            this.showDialog("mediaItemDeleteDialog", {
+                actionBindings: {
+                    cancelDeleteItem: ((event) => {
+                        this.hideDialog();
+                    }),
+                    deleteItem: ((event) => {
+                        this.hideDialog();
+                        mediaItem.delete().then(() => {
+                            this.previousView({ deletedItem: mediaItem });
+                        });
+                    })
+                }
+            })
+        }));
 
         // call the superclass once creation is done
         super.oncreate();
@@ -84,26 +89,6 @@ export default class ReadviewViewController extends mwf.ViewController {
      */
     async onReturnFromSubview(subviewid, returnValue, returnStatus) {
         // TODO: check from which view, and possibly with which status, we are returning, and handle returnValue accordingly
-    }
-
-    deleteItem(item) {
-        item.delete().then(() => this.removeFromListview(item._id));
-    }
-
-    deleteItemDialog(item) {
-        this.showDialog("mediaItemDeleteDialog", {
-            item: item,
-            actionBindings: {
-                cancelDeleteItem: ((event) => {
-                    this.hideDialog();
-                }),
-                deleteItem: ((event) => {
-                    this.deleteItem(item);
-                    this.hideDialog();
-                    this.previousView({ deletedItem: item });
-                })
-            }
-        })
-    }
+    }   
 
 }
