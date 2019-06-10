@@ -191,12 +191,12 @@ export default class ListviewViewController extends mwf.ViewController {
                     this.hideDialog();
                 }),
                 deleteDatabase: ((event) => {
-                    indexedDB.deleteDatabase(dbname);
                     this.hideDialog();
-                    this.initialiseListview();
+                    indexedDB.deleteDatabase(dbname);
+                    location.reload(true);
                 })
             }
         })
     }
-}
 
+}
