@@ -66,7 +66,7 @@ export default class EditviewViewController extends mwf.ViewController {
         this.editForm = this.root.querySelector("main form");
         this.urlInput = this.editForm.url;
         this.urlInput.onblur = () => {
-            this.previewImg.src = this.urlInput.value;
+            this.previewImg.src = this.urlInput.value + "?t=" + this.mediaItem._id;
         };
 
         this.editForm.onsubmit = () => {
