@@ -36,24 +36,48 @@ export default class EditviewViewController extends mwf.ViewController {
         //     this.mediaItem = new entities.MediaItem();
         // }
 
-        this.bindElement("mediaEditviewTemplate", { item: this.mediaItem }, this.root);
+        // this.bindElement("mediaEditviewTemplate", { item: this.mediaItem }, this.root);
+
+        this.viewProxy = this.bindElement(
+            "mediaEditviewTemplate",
+            { item: this.mediaItem },
+            this.root
+        ).viewProxy;
+
+        this.viewProxy.bindAction("deleteItem", (() => {
+            this.showDialog("mediaItemDeleteDialog", {
+                actionBindings: {
+                    cancelDeleteItem: ((event) => {
+                        this.hideDialog();
+                    }),
+                    deleteItem: ((event) => {
+                        this.hideDialog();
+                        this.mediaItem.delete().then(() => {
+                            this.previousView({ deletedItem: this.mediaItem }, "deleted");
+                        });
+                    })
+                }
+            })
+        }));
 
         // TODO: do databinding, set listeners, initialise the view
         this.editForm = this.root.querySelector("main form");
         this.editForm.onsubmit = () => {
-            alert("submit! mediaItem: " + JSON.stringify(this.mediaItem));
+            // alert("submit! mediaItem: " + JSON.stringify(this.mediaItem));
 
-            // If mediaItem already exists, then update
+            // If mediaItem already exists, then update.
             if (this.mediaItem.created) {
-
-            } else {
-                
+                this.mediaItem.update().then(() => this.previousView({ item: this.mediaItem }, "updated"));
             }
-
-            this.mediaItem.create().then(() => this.previousView({ item: this.mediaItem }, "created"));
+            // Else, newly create mediaItem.
+            else {
+                this.mediaItem.create().then(() => this.previousView({ item: this.mediaItem }, "created"));
+            }
 
             return false;
         };
+
+
 
 
         // call the superclass once creation is done

@@ -27,8 +27,8 @@
 
 .my-long-word-header {
     padding-left: 10px;
-    max-width: calc(100% - 100px);
-    max-width: -webkit-calc(100% - 100px);
+    max-width: calc(100% - 140px);
+    max-width: -webkit-calc(100% - 140px);
     overflow: hidden;
 }
 
