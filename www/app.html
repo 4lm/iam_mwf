@@ -113,12 +113,13 @@
                 <button class="mwf-imgbutton mwf-right-align mwf-img-delete" disabled="{{#unless item.created}}mwf-disabled{{/unless}}" on-click="deleteItem"></button>
                 <input type="submit" form="mediaEditForm" class="mwf-imgbutton mwf-right-align mwf-img-disk" />
             </header>
-            <main>
+            <main class="mwf-scrollview">
                 <form id="mediaEditForm">
                     <fieldset class="mwf-material">
                         <legend>URL</legend>
                         <input type="url" name="url" required="required" value="{{item.src}}" />
                     </fieldset>
+                    <img src="{{item.src}}?t={{item._id}}" />
                     <fieldset class="mwf-material">
                         <legend>Titel</legend>
                         <input type="text" name="title" required="required" value="{{item.title}}" />
