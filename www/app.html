@@ -109,8 +109,10 @@
         <div class="mwf-template mwf-databind" data-mwf-templatename="mediaEditviewTemplate">
             <header>
                 <button class="mwf-imgbutton mwf-left-align mwf-img-sandwich"></button>
-                <h1 class="mwf-left-align mwf-right-fill mwf-dyncontent">{{#if item.created}}Editieren: {{item.title}}{{else}}Neues Medium{{/if}}</h1>
-                <button class="mwf-imgbutton mwf-right-align mwf-img-delete" disabled="{{#unless item.created}}mwf-disabled{{/unless}}" on-click="deleteItem"></button>
+                <h1 class="mwf-left-align mwf-right-fill mwf-dyncontent">{{#if item.created}}Editieren:
+                    {{item.title}}{{else}}Neues Medium{{/if}}</h1>
+                <button class="mwf-imgbutton mwf-right-align mwf-img-delete"
+                    disabled="{{#unless item.created}}mwf-disabled{{/unless}}" on-click="deleteItem"></button>
                 <input type="submit" form="mediaEditForm" class="mwf-imgbutton mwf-right-align mwf-img-disk" />
             </header>
             <main class="mwf-scrollview">
@@ -118,6 +120,8 @@
                     <fieldset class="mwf-material">
                         <legend>URL</legend>
                         <input type="url" name="url" required="required" value="{{item.src}}" />
+                    </fieldset>
+                    <fieldset>
                         <input type="file" name="srcUpload" />
                     </fieldset>
                     <img src="{{#if item.created}}{{item.src}}?t={{item._id}}{{/if}}" />

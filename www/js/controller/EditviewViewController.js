@@ -75,13 +75,34 @@ export default class EditviewViewController extends mwf.ViewController {
             if (this.fileInput.files[0]) {
                 const objecturl = URL.createObjectURL(this.fileInput.files[0]);
                 //alert("selected image!: " + objecturl);
+                // this.urlInput.value = objecturl;
                 this.previewImg.src = objecturl;
+                this.mediaItem.src = objecturl;
+                this.viewProxy.update({ item: this.mediaItem });
             }
         };
 
         this.editForm.onsubmit = () => {
 
-            this.createOrEditMediaItem();
+            if (this.fileInput.files[0]) {
+                // enctype='multipart/form-data' is automatically set
+                let data = new FormData();
+                data.append("srcUpload", this.fileInput.files[0]);
+
+                const xhreq = new XMLHttpRequest();
+                xhreq.open("POST", "api/upload");
+                xhreq.send(data);
+                xhreq.onreadystatechange = () => {
+                    if (xhreq.readyState == 4 && xhreq.status == 200) {
+                        // alert("uploaded: " + xhreq.responseText);
+                        const responsedata = JSON.parse(xhreq.responseText);
+                        this.mediaItem.src = responsedata.data.srcUpload;
+                        this.createOrEditMediaItem();
+                    }
+                };
+            } else {
+                this.createOrEditMediaItem();
+            }
 
             return false;
         };
