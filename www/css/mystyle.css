@@ -15,6 +15,11 @@
     max-width: 100%;
 }
 
+#mediaEditview img {
+    margin-left: 2px;
+    padding-left: 10px;
+}
+
 #currentCRUDScope {
     display: inline-block;
     font-size: 12pt;
