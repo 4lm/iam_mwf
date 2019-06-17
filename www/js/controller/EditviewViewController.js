@@ -75,7 +75,7 @@ export default class EditviewViewController extends mwf.ViewController {
             if (this.fileInput.files[0]) {
                 const objecturl = URL.createObjectURL(this.fileInput.files[0]);
                 //alert("selected image!: " + objecturl);
-                this.previewImg = objecturl;
+                this.previewImg.src = objecturl;
             }
         };
 
