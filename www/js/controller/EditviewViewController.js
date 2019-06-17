@@ -16,7 +16,20 @@ export default class EditviewViewController extends mwf.ViewController {
      * for any view: initialise the view
      */
     async oncreate() {
+
+        this.mediaItem = new entities.MediaItem();
+
+        this.bindElement("mediaEditviewTemplate", { item: this.mediaItem }, this.root);
+
         // TODO: do databinding, set listeners, initialise the view
+        this.editForm = this.root.querySelector("main form");
+        this.editForm.onsubmit = () => {
+            alert("submit! mediaItem: " + JSON.stringify(this.mediaItem));
+
+            this.mediaItem.create().then(() => this.previousView());
+
+            return false;
+        };
 
 
         // call the superclass once creation is done

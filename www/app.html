@@ -106,31 +106,33 @@
     </div>
 
     <div class="mwf-view mwf-view-initial" id="mediaEditview" data-mwf-viewcontroller="EditviewViewController">
-        <header>
-            <button class="mwf-imgbutton mwf-left-align mwf-img-sandwich"></button>
-            <h1 class="mwf-left-align mwf-right-fill">Neues Medium</h1>
-            <button class="mwf-imgbutton mwf-right-align mwf-img-delete"></button>
-            <input type="submit" form="mediaEditForm" class="mwf-imgbutton mwf-right-align mwf-img-disk"/>
-        </header>
-        <main>
-            <form id="mediaEditForm">
-                <fieldset class="mwf-material">
+        <div class="mwf-template mwf-databind" data-mwf-templatename="mediaEditviewTemplate">
+            <header>
+                <button class="mwf-imgbutton mwf-left-align mwf-img-sandwich"></button>
+                <h1 class="mwf-left-align mwf-right-fill">Neues Medium</h1>
+                <button class="mwf-imgbutton mwf-right-align mwf-img-delete"></button>
+                <input type="submit" form="mediaEditForm" class="mwf-imgbutton mwf-right-align mwf-img-disk" />
+            </header>
+            <main>
+                <form id="mediaEditForm">
+                    <fieldset class="mwf-material">
                         <legend>URL</legend>
-                        <input type="url" name="url" required/>
-                </fieldset>
-                <fieldset class="mwf-material">
+                        <input type="url" name="url" required="required" value="{{item.src}}" />
+                    </fieldset>
+                    <fieldset class="mwf-material">
                         <legend>Titel</legend>
-                        <input type="text" name="title" required/>
-                </fieldset>
-                <fieldset class="mwf-material">
+                        <input type="text" name="title" required="required" value="{{item.title}}" />
+                    </fieldset>
+                    <fieldset class="mwf-material">
                         <legend>Beschreibung</legend>
-                        <textarea name="description"></textarea>
-                </fieldset>
-            </form>
-        </main>
-        <footer>
-            <button class="mwf-imgbutton mwf-left-align mwf-img-backward mwf-back"></button>
-        </footer>
+                        <textarea name="description" value={{item.description}}></textarea>
+                    </fieldset>
+                </form>
+            </main>
+            <footer>
+                <button class="mwf-imgbutton mwf-left-align mwf-img-backward mwf-back"></button>
+            </footer>
+        </div>
     </div>
 
     <div class="mwf-dialog mwf-popup mwf-template mwf-databind mwf-view-component"
@@ -139,25 +141,25 @@
             <h2>Medium löschen</h2>
             <p class="my-long-word-dialog">Möchten Sie das Medium {{item.title}} löschen?</p>
             <div class="mwf-buttonbar">
-                    <button class="mwf-left-align
+                <button class="mwf-left-align
                     mwf-button" type="button" on-click="cancelDeleteItem">Abbrechen</button>
-                    <button class="mwf-button-prio mwf-left-align
+                <button class="mwf-button-prio mwf-left-align
                     mwf-button" type="button" on-click="deleteItem">Löschen</button>
         </main>
     </div>
 
     <div class="mwf-dialog mwf-popup mwf-template mwf-databind mwf-view-component"
-    data-mwf-viewcontroller="GenericDialogTemplateViewController" data-mwf-templatename="deleteIndexedDBDialog">
-    <main>
-        <h2>Datenbank löschen</h2>
-        <p>Soll die lokale IndexedDB Datenbank "{{dbname}}" wirklich gelöscht werden?</p>
-        <div class="mwf-buttonbar">
+        data-mwf-viewcontroller="GenericDialogTemplateViewController" data-mwf-templatename="deleteIndexedDBDialog">
+        <main>
+            <h2>Datenbank löschen</h2>
+            <p>Soll die lokale IndexedDB Datenbank "{{dbname}}" wirklich gelöscht werden?</p>
+            <div class="mwf-buttonbar">
                 <button class="mwf-left-align
                 mwf-button" type="button" on-click="cancelDeleteDatabase">Abbrechen</button>
                 <button class="mwf-button-prio mwf-left-align
                 mwf-button" type="button" on-click="deleteDatabase">Löschen</button>
-    </main>
-</div>
+        </main>
+    </div>
 
 </body>
 
