@@ -65,8 +65,18 @@ export default class EditviewViewController extends mwf.ViewController {
         this.previewImg = this.root.querySelector("main img");
         this.editForm = this.root.querySelector("main form");
         this.urlInput = this.editForm.url;
+        this.fileInput = this.editForm.srcUpload;
+
         this.urlInput.onblur = () => {
             this.previewImg.src = this.urlInput.value + "?t=" + Math.abs(this.mediaItem._id);
+        };
+
+        this.fileInput.onchange = () => {
+            if (this.fileInput.files[0]) {
+                const objecturl = URL.createObjectURL(this.fileInput.files[0]);
+                //alert("selected image!: " + objecturl);
+                this.previewImg = objecturl;
+            }
         };
 
         this.editForm.onsubmit = () => {

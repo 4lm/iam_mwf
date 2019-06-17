@@ -118,6 +118,7 @@
                     <fieldset class="mwf-material">
                         <legend>URL</legend>
                         <input type="url" name="url" required="required" value="{{item.src}}" />
+                        <input type="file" name="srcUpload" />
                     </fieldset>
                     <img src="{{#if item.created}}{{item.src}}?t={{item._id}}{{/if}}" />
                     <fieldset class="mwf-material">
