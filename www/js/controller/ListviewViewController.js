@@ -161,23 +161,23 @@ export default class ListviewViewController extends mwf.ViewController {
         })
     }
 
-    // editItem(item) {
-    //     this.showDialog("mediaItemDialog", {
-    //         item: item,
-    //         actionBindings: {
-    //             submitForm: ((event) => {
-    //                 event.original.preventDefault();
-    //                 item.update().then(() => {
-    //                     this.updateInListview(item._id, item);
-    //                 });
-    //                 this.hideDialog();
-    //             }),
-    //             deleteItem: ((event) => {
-    //                 this.deleteItemDialog(item);
-    //             })
-    //         }
-    //     })
-    // }
+    editItem(item) {
+        this.showDialog("mediaItemDialog", {
+            item: item,
+            actionBindings: {
+                submitForm: ((event) => {
+                    event.original.preventDefault();
+                    item.update().then(() => {
+                        this.updateInListview(item._id, item);
+                    });
+                    this.hideDialog();
+                }),
+                deleteItem: ((event) => {
+                    this.deleteItemDialog(item);
+                })
+            }
+        })
+    }
 
     // createNewItem() {
     //     const url = "https://placeimg.com/300/400/city";

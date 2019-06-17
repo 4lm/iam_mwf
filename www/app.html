@@ -65,12 +65,12 @@
         <main>
             <ul>
                 <li class="mwf-li-singletitle mwf-menu-item" data-mwf-targetaction="deleteItemDialog">Löschen</li>
-                <li class="mwf-li-singletitle mwf-menu-item" data-mwf-targetview="mediaEditview">Editieren</li>
+                <li class="mwf-li-singletitle mwf-menu-item" data-mwf-targetaction="editItem">Editieren</li>
             </ul>
         </main>
     </div>
 
-    <!-- <div class="mwf-dialog mwf-popup mwf-template mwf-databind mwf-view-component"
+    <div class="mwf-dialog mwf-popup mwf-template mwf-databind mwf-view-component"
         data-mwf-viewcontroller="GenericDialogTemplateViewController" data-mwf-templatename="mediaItemDialog">
         <main>
             <h2>{{#if item.created}}Medium editieren{{else}}Neues
@@ -87,7 +87,7 @@
                 </div>
             </form>
         </main>
-    </div> -->
+    </div>
 
     <div class="mwf-view" id="mediaReadview" data-mwf-viewcontroller="ReadviewViewController">
         <div class="mwf-template mwf-databind" data-mwf-templatename="mediaReadviewTemplate">
