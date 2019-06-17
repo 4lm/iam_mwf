@@ -14,10 +14,27 @@ export default class EditviewViewController extends mwf.ViewController {
 
     /*
      * for any view: initialise the view
+     *
+     * In case of editing an existing item, the framework passes an
+     * object of the form {item: mediaItem}, where mediaItem is the
+     * item to be edited.
+     * 
      */
     async oncreate() {
 
-        this.mediaItem = new entities.MediaItem();
+        // Ternary check of edit and create cases
+        this.mediaItem = (this.args && this.args.item) ? this.args.item : new entities.MediaItem();
+
+        // Alternativ, to above ternary operator:
+        //
+        // // Edit case
+        // if (this.args && this.args.item) {
+        //     this.mediaItem = this.args.item;
+        // }
+        // // Create case
+        // else {
+        //     this.mediaItem = new entities.MediaItem();
+        // }
 
         this.bindElement("mediaEditviewTemplate", { item: this.mediaItem }, this.root);
 
@@ -25,6 +42,13 @@ export default class EditviewViewController extends mwf.ViewController {
         this.editForm = this.root.querySelector("main form");
         this.editForm.onsubmit = () => {
             alert("submit! mediaItem: " + JSON.stringify(this.mediaItem));
+
+            // If mediaItem already exists, then update
+            if (this.mediaItem.created) {
+
+            } else {
+                
+            }
 
             this.mediaItem.create().then(() => this.previousView({ item: this.mediaItem }, "created"));
 
