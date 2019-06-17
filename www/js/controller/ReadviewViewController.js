@@ -38,7 +38,7 @@ export default class ReadviewViewController extends mwf.ViewController {
                     deleteItem: ((event) => {
                         this.hideDialog();
                         mediaItem.delete().then(() => {
-                            this.previousView({ deletedItem: mediaItem });
+                            this.previousView({ deletedItem: mediaItem }, "deleted");
                         });
                     })
                 }
@@ -89,6 +89,6 @@ export default class ReadviewViewController extends mwf.ViewController {
      */
     async onReturnFromSubview(subviewid, returnValue, returnStatus) {
         // TODO: check from which view, and possibly with which status, we are returning, and handle returnValue accordingly
-    }   
+    }
 
 }

@@ -49,7 +49,8 @@ export default class ListviewViewController extends mwf.ViewController {
             //         "m",
             //         "https://placeimg.com/100/100/city"))
             // .then((created) => this.addToListview(created));
-            this.createNewItem();
+            // this.createNewItem();
+            this.nextView("mediaEditview");
         });
 
 
@@ -122,8 +123,14 @@ export default class ListviewViewController extends mwf.ViewController {
      */
     async onReturnFromSubview(subviewid, returnValue, returnStatus) {
         // TODO: check from which view, and possibly with which status, we are returning, and handle returnValue accordingly
-        if (subviewid == "mediaReadview" && returnValue && returnValue.deletedItem) {
-            this.removeFromListview(returnValue.deletedItem._id);
+        if (subviewid == "mediaReadview") {
+            if (returnStatus == "deleted" && returnValue) {
+                this.removeFromListview(returnValue.deletedItem._id);
+            }
+        } else if (subviewid == "mediaEditview") {
+            if (returnStatus == "created" && returnValue) {
+                this.addToListview(returnValue.item);
+            }
         }
     }
 
@@ -168,20 +175,20 @@ export default class ListviewViewController extends mwf.ViewController {
         })
     }
 
-    createNewItem() {
-        const url = "https://placeimg.com/300/400/city";
-        const newItem = new entities.MediaItem("", url);
-        this.showDialog("mediaItemDialog", {
-            item: newItem,
-            actionBindings: {
-                submitForm: ((event) => {
-                    event.original.preventDefault();
-                    newItem.create().then(() => this.addToListview(newItem));
-                    this.hideDialog();
-                })
-            }
-        });
-    }
+    // createNewItem() {
+    //     const url = "https://placeimg.com/300/400/city";
+    //     const newItem = new entities.MediaItem("", url);
+    //     this.showDialog("mediaItemDialog", {
+    //         item: newItem,
+    //         actionBindings: {
+    //             submitForm: ((event) => {
+    //                 event.original.preventDefault();
+    //                 newItem.create().then(() => this.addToListview(newItem));
+    //                 this.hideDialog();
+    //             })
+    //         }
+    //     });
+    // }
 
     deleteIndexedDBDialog(dbname) {
         this.showDialog("deleteIndexedDBDialog", {
