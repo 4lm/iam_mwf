@@ -119,7 +119,7 @@
                         <legend>URL</legend>
                         <input type="url" name="url" required="required" value="{{item.src}}" />
                     </fieldset>
-                    <img src="{{item.src}}?t={{item._id}}" />
+                    <img src="{{#if item.created}}{{item.src}}?t={{item._id}}{{/if}}" />
                     <fieldset class="mwf-material">
                         <legend>Titel</legend>
                         <input type="text" name="title" required="required" value="{{item.title}}" />
