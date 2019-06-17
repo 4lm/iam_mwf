@@ -31,6 +31,7 @@ export default class ReadviewViewController extends mwf.ViewController {
 
         this.viewProxy.bindAction("deleteItem", (() => {
             this.showDialog("mediaItemDeleteDialog", {
+                item: mediaItem,
                 actionBindings: {
                     cancelDeleteItem: ((event) => {
                         this.hideDialog();

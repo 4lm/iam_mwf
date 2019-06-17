@@ -46,6 +46,7 @@ export default class EditviewViewController extends mwf.ViewController {
 
         this.viewProxy.bindAction("deleteItem", (() => {
             this.showDialog("mediaItemDeleteDialog", {
+                item: this.mediaItem,
                 actionBindings: {
                     cancelDeleteItem: ((event) => {
                         this.hideDialog();
