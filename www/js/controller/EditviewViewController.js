@@ -70,25 +70,29 @@ export default class EditviewViewController extends mwf.ViewController {
         };
 
         this.editForm.onsubmit = () => {
-            // alert("submit! mediaItem: " + JSON.stringify(this.mediaItem));
 
-            // If mediaItem already exists, then update.
-            if (this.mediaItem.created) {
-                this.mediaItem.update().then(() => this.previousView({ item: this.mediaItem }, "updated"));
-            }
-            // Else, newly create mediaItem.
-            else {
-                this.mediaItem.create().then(() => this.previousView({ item: this.mediaItem }, "created"));
-            }
+            this.createOrEditMediaItem();
 
             return false;
         };
 
 
 
-
         // call the superclass once creation is done
         super.oncreate();
+    }
+
+    createOrEditMediaItem() {
+        // alert("submit! mediaItem: " + JSON.stringify(this.mediaItem));
+
+        // If mediaItem already exists, then update.
+        if (this.mediaItem.created) {
+            this.mediaItem.update().then(() => this.previousView({ item: this.mediaItem }, "updated"));
+        }
+        // Else, newly create mediaItem.
+        else {
+            this.mediaItem.create().then(() => this.previousView({ item: this.mediaItem }, "created"));
+        }
     }
 
     /*
