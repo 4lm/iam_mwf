@@ -68,7 +68,7 @@ export default class EditviewViewController extends mwf.ViewController {
         this.fileInput = this.editForm.srcUpload;
 
         this.urlInput.onblur = () => {
-            this.previewImg.src = this.urlInput.value + "?t=" + Math.abs(this.mediaItem._id);
+            this.previewImg.src = this.urlInput.value;
         };
 
         this.fileInput.onchange = () => {

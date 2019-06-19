@@ -123,7 +123,7 @@
                         <input class="mwf-material-altinput" type="file" accept="image/*,video/*" name="srcUpload" id="mediaEditviewSrcUpload" />
                         <label class="mwf-material-altinput mwf-imgbutton mwf-img-camera" for="mediaEditviewSrcUpload"></label>
                     </fieldset>
-                    <img src="{{#if item.created}}{{item.src}}?t={{item._id}}{{/if}}" />
+                    <img src="{{#if item.created}}{{item.src}}{{/if}}" />
                     <fieldset class="mwf-material">
                         <legend>Titel</legend>
                         <input type="text" name="title" required="required" value="{{item.title}}" />
