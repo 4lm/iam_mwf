@@ -62,24 +62,28 @@ export default class EditviewViewController extends mwf.ViewController {
         }));
 
         // TODO: do databinding, set listeners, initialise the view
-        this.previewImg = this.root.querySelector("main img");
+        this.preview = this.root.querySelector("main .my-preview");
         this.editForm = this.root.querySelector("main form");
         this.urlInput = this.editForm.url;
         this.fileInput = this.editForm.srcUpload;
 
         this.urlInput.onblur = () => {
-            this.previewImg.src = this.urlInput.value;
+            this.preview.src = this.urlInput.value;
         };
 
         this.fileInput.onchange = () => {
+
             if (this.fileInput.files[0]) {
                 const objecturl = URL.createObjectURL(this.fileInput.files[0]);
-                //alert("selected image!: " + objecturl);
-                // this.urlInput.value = objecturl;
-                this.previewImg.src = objecturl;
+                const contentType = this.fileInput.files[0].type;
+                
                 this.mediaItem.src = objecturl;
+                this.mediaItem.contentType = contentType;
                 this.viewProxy.update({ item: this.mediaItem });
+                this.preview = this.root.querySelector("main .my-preview");
+                this.preview.src = objecturl;
             }
+
         };
 
         this.editForm.onsubmit = () => {

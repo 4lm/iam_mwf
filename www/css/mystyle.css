@@ -15,9 +15,13 @@
     max-width: 100%;
 }
 
-#mediaEditview img {
+#mediaEditview main .my-preview {
     margin-left: 2px;
     padding-left: 10px;
+}
+
+#mediaEditview main video {
+    width: calc(100% - 28px);
 }
 
 #currentCRUDScope {
