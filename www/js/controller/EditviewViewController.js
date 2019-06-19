@@ -76,7 +76,7 @@ export default class EditviewViewController extends mwf.ViewController {
             if (this.fileInput.files[0]) {
                 const objecturl = URL.createObjectURL(this.fileInput.files[0]);
                 const contentType = this.fileInput.files[0].type;
-                
+
                 this.mediaItem.src = objecturl;
                 this.mediaItem.contentType = contentType;
                 this.viewProxy.update({ item: this.mediaItem });
@@ -115,6 +115,15 @@ export default class EditviewViewController extends mwf.ViewController {
 
         // call the superclass once creation is done
         super.oncreate();
+    }
+
+    async onpause() {
+
+        if (this.preview && this.preview.tagName == "VIDEO" && !this.preview.paused && !this.preview.ended) {
+            this.preview.pause();
+        }
+
+        super.onpause();
     }
 
     createOrEditMediaItem() {
