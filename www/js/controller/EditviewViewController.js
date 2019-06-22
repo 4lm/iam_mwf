@@ -135,11 +135,16 @@ export default class EditviewViewController extends mwf.ViewController {
 
         // If mediaItem already exists, then update.
         if (this.mediaItem.created) {
-            this.mediaItem.update().then(() => this.previousView({ item: this.mediaItem }, "updated"));
+            this.mediaItem.update().then(() => {
+                this.notifyListeners(new mwf.Event("crud", "updated", "MediaItem", this.mediaItem._id));
+                this.previousView({ item: this.mediaItem }, "updated");
+            });
         }
         // Else, newly create mediaItem.
         else {
-            this.mediaItem.create().then(() => this.previousView({ item: this.mediaItem }, "created"));
+            this.mediaItem.create().then(() => {
+                this.previousView();
+            });
         }
     }
 

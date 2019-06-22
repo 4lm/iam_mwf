@@ -138,21 +138,21 @@ export default class ListviewViewController extends mwf.ViewController {
      */
     async onReturnFromSubview(subviewid, returnValue, returnStatus) {
         // TODO: check from which view, and possibly with which status, we are returning, and handle returnValue accordingly
-        console.log("onReturnFromSubview Listview", subviewid, returnValue, returnStatus);
-        if (subviewid == "mediaReadview") {
-            entities.MediaItem.readAll().then(items => this.initialiseListview(items));
-            if (returnStatus == "deleted" && returnValue) {
-                this.removeFromListview(returnValue.deletedItem._id);
-            }
-        } else if (subviewid == "mediaEditview") {
-            if (returnStatus == "created" && returnValue) {
-                this.addToListview(returnValue.item);
-            } else if (returnStatus == "updated" && returnValue) {
-                this.updateInListview(returnValue.item._id, returnValue.item);
-            } else if (returnStatus == "deleted" && returnValue) {
-                this.removeFromListview(returnValue.deletedItem._id);
-            }
-        }
+        // console.log("onReturnFromSubview Listview", subviewid, returnValue, returnStatus);
+        // if (subviewid == "mediaReadview") {
+        //     entities.MediaItem.readAll().then(items => this.initialiseListview(items));
+        //     if (returnStatus == "deleted" && returnValue) {
+        //         this.removeFromListview(returnValue.deletedItem._id);
+        //     }
+        // } else if (subviewid == "mediaEditview") {
+        //     if (returnStatus == "created" && returnValue) {
+        //         this.addToListview(returnValue.item);
+        //     } else if (returnStatus == "updated" && returnValue) {
+        //         this.updateInListview(returnValue.item._id, returnValue.item);
+        //     } else if (returnStatus == "deleted" && returnValue) {
+        //         this.removeFromListview(returnValue.deletedItem._id);
+        //     }
+        // }
     }
 
     // deleteItem(item) {
@@ -189,7 +189,7 @@ export default class ListviewViewController extends mwf.ViewController {
                     event.original.preventDefault();
                     item.update().then(() => {
                         // this.updateInListview(item._id, item);
-                        this.notifyListeners(new mwf.Event("crud", "updated", "MediaItem", item));
+                        this.notifyListeners(new mwf.Event("crud", "updated", "MediaItem", item._id));
                     });
                     this.hideDialog();
                 }),
