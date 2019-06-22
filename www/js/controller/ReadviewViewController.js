@@ -39,7 +39,8 @@ export default class ReadviewViewController extends mwf.ViewController {
                     deleteItem: ((event) => {
                         this.hideDialog();
                         mediaItem.delete().then(() => {
-                            this.previousView({ deletedItem: mediaItem }, "deleted");
+                            this.notifyListeners(new mwf.Event("crud", "deleted", "MediaItem", mediaItem._id));
+                            this.previousView();
                         });
                     })
                 }
@@ -49,6 +50,12 @@ export default class ReadviewViewController extends mwf.ViewController {
         this.viewProxy.bindAction("editItem", (() => {
             this.nextView("mediaEditview", this.args);
         }));
+
+        this.addListener(
+            new mwf.EventMatcher("crud","deleted","MediaItem"),
+            ((event) => this.markAsObsolete()),
+            true
+        );
 
         // call the superclass once creation is done
         super.oncreate();
