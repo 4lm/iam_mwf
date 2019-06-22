@@ -155,12 +155,12 @@ export default class ListviewViewController extends mwf.ViewController {
         }
     }
 
-    deleteItem(item) {
-        // this.crudops.delete(item._id).then(() => {
-        //     this.removeFromListview(item._id);
-        // });
-        item.delete().then(() => this.removeFromListview(item._id));
-    }
+    // deleteItem(item) {
+    //     // this.crudops.delete(item._id).then(() => {
+    //     //     this.removeFromListview(item._id);
+    //     // });
+    //     item.delete().then(() => this.removeFromListview(item._id));
+    // }
 
     deleteItemDialog(item) {
         this.showDialog("mediaItemDeleteDialog", {
@@ -170,7 +170,10 @@ export default class ListviewViewController extends mwf.ViewController {
                     this.hideDialog();
                 }),
                 deleteItem: ((event) => {
-                    this.deleteItem(item);
+                    // this.deleteItem(item);
+                    item.delete().then(() => {
+                        this.notifyListeners(new mwf.Event("crud", "deleted", "MediaItem", item._id));
+                    });
                     this.hideDialog();
                     entities.MediaItem.readAll().then(items => this.initialiseListview(items));
                 })
