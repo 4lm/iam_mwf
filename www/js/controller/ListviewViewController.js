@@ -187,11 +187,7 @@ export default class ListviewViewController extends mwf.ViewController {
             actionBindings: {
                 submitForm: ((event) => {
                     event.original.preventDefault();
-                    item.update().then(() => {
-                        // this.updateInListview(item._id, item);
-                        this.notifyListeners(new mwf.Event("crud", "updated", "MediaItem", item._id));
-                    });
-                    this.hideDialog();
+                    item.update().then(() => this.hideDialog());
                 }),
                 deleteItem: ((event) => {
                     this.deleteItemDialog(item);
