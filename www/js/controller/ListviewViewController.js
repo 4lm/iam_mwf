@@ -170,12 +170,7 @@ export default class ListviewViewController extends mwf.ViewController {
                     this.hideDialog();
                 }),
                 deleteItem: ((event) => {
-                    // this.deleteItem(item);
-                    item.delete().then(() => {
-                        // this.notifyListeners(new mwf.Event("crud", "deleted", "MediaItem", item._id));
-                        this.hideDialog();
-                        entities.MediaItem.readAll().then(items => this.initialiseListview(items));
-                    });
+                    item.delete().then(() => this.hideDialog());
                 })
             }
         })
