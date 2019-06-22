@@ -54,7 +54,7 @@ export default class EditviewViewController extends mwf.ViewController {
                     deleteItem: ((event) => {
                         this.hideDialog();
                         this.mediaItem.delete().then(() => {
-                            this.previousView({ deletedItem: this.mediaItem }, "deleted");
+                            this.nextView("mediaOverview", this.args);
                         });
                     })
                 }

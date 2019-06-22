@@ -94,6 +94,12 @@ export default class ReadviewViewController extends mwf.ViewController {
      */
     async onReturnFromSubview(subviewid, returnValue, returnStatus) {
         // TODO: check from which view, and possibly with which status, we are returning, and handle returnValue accordingly
+        console.log("onReturnFromSubview Readview", subviewid, returnValue, returnStatus);
+        if (subviewid == "mediaEditview") {
+            if (returnStatus == "updated" && returnValue) {
+                this.viewProxy.update(returnValue);
+            }
+        }
     }
 
 }
