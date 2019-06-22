@@ -43,7 +43,11 @@
             <ul class="mwf-listview" data-mwf-listitem-view="myapp-listitem" data-mwf-listitem-menu="meditaItemMenu">
                 <li class="mwf-listitem mwf-li-title-subtitle mwf-template mwf-databind"
                     data-mwf-templatename="myapp-listitem" data-mwf-targetview="mediaReadview">
-                    <img class="mwf-left-align" src="{{src}}?t={{_id}}">
+                    {{#if mediaType == 'video'}}
+                    <video class="my-video-preview" src="{{src}}"></video>
+                    {{else}}
+                    <img class="mwf-left-align" src="{{src}}?t={{_id}}" />
+                    {{/if}}
                     <div class="mwf-li-titleblock mwf-right-fill">
                         <h2>{{title}} {{_id}}</h2>
                         <h3>{{addedDateString}}</h3>
