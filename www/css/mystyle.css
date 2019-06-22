@@ -50,8 +50,12 @@
     overflow: hidden;
 }
 
-.my-video-preview {
+.my-video-listview {
     width: 50px;
     height: 50px;
+}
+
+.my-video-readview {
+    width: 100%;
 }
  

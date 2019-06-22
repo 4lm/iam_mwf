@@ -44,7 +44,7 @@
                 <li class="mwf-listitem mwf-li-title-subtitle mwf-template mwf-databind"
                     data-mwf-templatename="myapp-listitem" data-mwf-targetview="mediaReadview">
                     {{#if mediaType == 'video'}}
-                    <video class="my-video-preview" src="{{src}}"></video>
+                    <video class="my-video-listview" src="{{src}}"></video>
                     {{else}}
                     <img class="mwf-left-align" src="{{src}}?t={{_id}}" />
                     {{/if}}
@@ -107,7 +107,11 @@
                 <button class="mwf-imgbutton mwf-img-pencil mwf-right-align" on-click="editItem"></button>
             </header>
             <main class="mwf-scrollview">
-                <img src="{{item.src}}?t={{item._id}}" />
+                {{#if item.mediaType == 'video'}}
+                <video class="my-video-readview" controls="controls" src="{{#if item.created}}{{item.src}}{{/if}}"></video>
+                {{else}}
+                <img src="{{#if item.created}}{{item.src}}?t={{item._id}}{{/if}}" />
+                {{/if}}
                 <div class="my-description">{{#if item.description}}{{item.description}}{{else}}Kein Beschreibungstext vorhanden.{{/if}}</div>
             </main>
             <footer>
