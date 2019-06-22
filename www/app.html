@@ -31,6 +31,8 @@
 <body data-mwf-application="MyApplication" class="mwf-loading-app">
 
     <!-- TODO-REPEATED: add new views here -->
+
+    <!-- Listview -->
     <div class="mwf-view mwf-view-initial" data-mwf-viewcontroller="ListviewViewController" id="mediaOverview">
         <header>
             <button class="mwf-imgbutton mwf-img-sandwich mwf-left-align" id="deleteIndexedDB"></button>
@@ -57,6 +59,7 @@
         </footer>
     </div>
 
+    <!-- Menu on mediaItem -->
     <div data-mwf-templatename="meditaItemMenu" class="mwf-listitem-menu mwf-template mwf-databind mwf-dialog
          mwf-popup">
         <header>
@@ -70,6 +73,7 @@
         </main>
     </div>
 
+    <!-- Dialog on mediaItem -->
     <div class="mwf-dialog mwf-popup mwf-template mwf-databind mwf-view-component"
         data-mwf-viewcontroller="GenericDialogTemplateViewController" data-mwf-templatename="mediaItemDialog">
         <main>
@@ -89,6 +93,7 @@
         </main>
     </div>
 
+    <!-- Readview -->
     <div class="mwf-view" id="mediaReadview" data-mwf-viewcontroller="ReadviewViewController">
         <div class="mwf-template mwf-databind" data-mwf-templatename="mediaReadviewTemplate">
             <header>
@@ -105,6 +110,7 @@
         </div>
     </div>
 
+    <!-- Editview -->
     <div class="mwf-view" id="mediaEditview" data-mwf-viewcontroller="EditviewViewController">
         <div class="mwf-template mwf-databind" data-mwf-templatename="mediaEditviewTemplate">
             <header>
@@ -144,6 +150,7 @@
         </div>
     </div>
 
+    <!-- Delete dialog on mediaItem -->
     <div class="mwf-dialog mwf-popup mwf-template mwf-databind mwf-view-component"
         data-mwf-viewcontroller="GenericDialogTemplateViewController" data-mwf-templatename="mediaItemDeleteDialog">
         <main>
@@ -157,6 +164,7 @@
         </main>
     </div>
 
+    <!-- Delete dialog on IndexedDB -->
     <div class="mwf-dialog mwf-popup mwf-template mwf-databind mwf-view-component"
         data-mwf-viewcontroller="GenericDialogTemplateViewController" data-mwf-templatename="deleteIndexedDBDialog">
         <main>
