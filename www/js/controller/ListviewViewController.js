@@ -125,6 +125,7 @@ export default class ListviewViewController extends mwf.ViewController {
         // TODO: check from which view, and possibly with which status, we are returning, and handle returnValue accordingly
         console.log("onReturnFromSubview Listview", subviewid, returnValue, returnStatus);
         if (subviewid == "mediaReadview") {
+            entities.MediaItem.readAll().then(items => this.initialiseListview(items));
             if (returnStatus == "deleted" && returnValue) {
                 this.removeFromListview(returnValue.deletedItem._id);
             }
