@@ -161,7 +161,7 @@ export default class ListviewViewController extends mwf.ViewController {
         })
     }
 
-    editItem(item) {
+    editItemDialog(item) {
         this.showDialog("mediaItemDialog", {
             item: item,
             actionBindings: {
