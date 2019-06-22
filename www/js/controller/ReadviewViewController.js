@@ -38,10 +38,7 @@ export default class ReadviewViewController extends mwf.ViewController {
                     }),
                     deleteItem: ((event) => {
                         this.hideDialog();
-                        mediaItem.delete().then(() => {
-                            this.notifyListeners(new mwf.Event("crud", "deleted", "MediaItem", mediaItem._id));
-                            this.previousView();
-                        });
+                        mediaItem.delete().then(() => this.previousView());
                     })
                 }
             })
