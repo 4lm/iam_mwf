@@ -46,6 +46,10 @@ export default class ReadviewViewController extends mwf.ViewController {
             })
         }));
 
+        this.viewProxy.bindAction("editItem", (() => {
+            this.nextView("mediaEditview", this.args);
+        }));
+
         // call the superclass once creation is done
         super.oncreate();
     }
