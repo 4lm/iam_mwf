@@ -34,6 +34,11 @@
     line-height: 40px;
 }
 
+.my-description {
+    padding: 10px;
+    font-size: 14pt;
+}
+
 .my-long-word-header {
     padding-left: 10px;
     max-width: calc(100% - 100px);
