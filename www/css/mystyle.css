@@ -58,6 +58,7 @@
     min-height: 40px;
     max-width: 40px;
     max-height: 40px;
+    opacity: 0.7;
 }
 
 .my-listview-titleblock {
