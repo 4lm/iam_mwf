@@ -45,7 +45,7 @@
                     data-mwf-templatename="myapp-listitem" data-mwf-targetview="mediaReadview">
                     {{#if mediaType == 'video'}}
                     <video class="my-listview-video" src="{{src}}"></video>
-                    <button class="my-listview-playbutton mwf-left-align mwf-imgbutton mwf-img-play-button"></button>
+                    <button id="my-listview-playbutton" class="mwf-left-align mwf-imgbutton mwf-img-play-button"></button>
                     <div class="my-listview-titleblock mwf-li-titleblock mwf-right-fill">
                         <h2 class="my-no-wrap">{{title}} {{_id}}</h2>
                         <h3>{{addedDateString}}</h3>
