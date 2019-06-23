@@ -50,15 +50,17 @@
                         <h2 class="my-no-wrap">{{title}} {{_id}}</h2>
                         <h3>{{addedDateString}}</h3>
                     </div>
+                    <button
+                    class="my-listview-options-vertical mwf-imgbutton mwf-img-options-vertical mwf-right-align mwf-listitem-menu-control"></button>
                     {{else}}
                     <img class="mwf-left-align" src="{{src}}?t={{_id}}" />
                     <div class="mwf-li-titleblock mwf-right-fill">
                         <h2 class="my-no-wrap">{{title}} {{_id}}</h2>
                         <h3>{{addedDateString}}</h3>
                     </div>
-                    {{/if}}
                     <button
-                        class="mwf-imgbutton mwf-img-options-vertical mwf-right-align mwf-listitem-menu-control"></button>
+                    class="mwf-imgbutton mwf-img-options-vertical mwf-right-align mwf-listitem-menu-control"></button>
+                    {{/if}}
                 </li>
             </ul>
         </main>

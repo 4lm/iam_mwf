@@ -64,9 +64,13 @@
 .my-listview-titleblock {
     position: relative;
     left: -50px;
+    min-width: calc(100% - 100px);
+    min-width: -webkit-calc(100% - 100px);
 }
 
-.mwf-img-options-vertical {
+.my-listview-options-vertical {
+    position: relative;
+    left: -50px;
     min-width: 40px;
     min-height: 40px;
     max-width: 40px;
