@@ -54,7 +54,7 @@ export default class ReadviewViewController extends mwf.ViewController {
             true
         );
 
-        this.preview = this.root.querySelector("main .my-video-readview");
+        this.preview = this.root.querySelector("main .my-readview-video");
         console.log("preview", this.preview);
 
         // call the superclass once creation is done

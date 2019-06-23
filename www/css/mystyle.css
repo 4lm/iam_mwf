@@ -50,12 +50,23 @@
     overflow: hidden;
 }
 
-.my-video-listview {
+.my-listview-playbutton {
+    position: relative;
+    background-size: auto 25px;
+    left: -45px;
+}
+
+.my-listview-titleblock {
+    position: relative;
+    left: -40px;
+}
+
+.my-listview-video {
     width: 50px;
     height: 50px;
 }
 
-.my-video-readview {
+.my-readview-video {
     width: 100%;
 }
  

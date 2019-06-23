@@ -44,14 +44,19 @@
                 <li class="mwf-listitem mwf-li-title-subtitle mwf-template mwf-databind"
                     data-mwf-templatename="myapp-listitem" data-mwf-targetview="mediaReadview">
                     {{#if mediaType == 'video'}}
-                    <video class="my-video-listview" src="{{src}}"></video>
+                    <video class="my-listview-video" src="{{src}}"></video>
+                    <button class="my-listview-playbutton mwf-left-align mwf-imgbutton mwf-img-play-button"></button>
+                    <div class="my-listview-titleblock mwf-li-titleblock mwf-right-fill">
+                        <h2>{{title}} {{_id}}</h2>
+                        <h3>{{addedDateString}}</h3>
+                    </div>
                     {{else}}
                     <img class="mwf-left-align" src="{{src}}?t={{_id}}" />
-                    {{/if}}
                     <div class="mwf-li-titleblock mwf-right-fill">
                         <h2>{{title}} {{_id}}</h2>
                         <h3>{{addedDateString}}</h3>
                     </div>
+                    {{/if}}
                     <button
                         class="mwf-imgbutton mwf-img-options-vertical mwf-right-align mwf-listitem-menu-control"></button>
                 </li>
@@ -108,11 +113,13 @@
             </header>
             <main class="mwf-scrollview">
                 {{#if item.mediaType == 'video'}}
-                <video class="my-video-readview" controls="controls" src="{{#if item.created}}{{item.src}}{{/if}}"></video>
+                <video class="my-readview-video" controls="controls"
+                    src="{{#if item.created}}{{item.src}}{{/if}}"></video>
                 {{else}}
                 <img src="{{#if item.created}}{{item.src}}?t={{item._id}}{{/if}}" />
                 {{/if}}
-                <div class="my-description">{{#if item.description}}{{item.description}}{{else}}Kein Beschreibungstext vorhanden.{{/if}}</div>
+                <div class="my-description">{{#if item.description}}{{item.description}}{{else}}Kein Beschreibungstext
+                    vorhanden.{{/if}}</div>
             </main>
             <footer>
                 <button class="mwf-back mwf-imgbutton mwf-img-backward"></button>
@@ -135,9 +142,12 @@
                 <form id="mediaEditForm">
                     <fieldset class="mwf-material">
                         <legend>URL</legend>
-                        <input pattern="http://.*|https://.*|blob:.*|content/.*" type="text" name="url" required="required" value="{{item.src}}" class="mwf-material-altinput-target" />
-                        <input class="mwf-material-altinput" type="file" accept="image/*,video/*" name="srcUpload" id="mediaEditviewSrcUpload" />
-                        <label class="mwf-material-altinput mwf-imgbutton mwf-img-camera" for="mediaEditviewSrcUpload"></label>
+                        <input pattern="http://.*|https://.*|blob:.*|content/.*" type="text" name="url"
+                            required="required" value="{{item.src}}" class="mwf-material-altinput-target" />
+                        <input class="mwf-material-altinput" type="file" accept="image/*,video/*" name="srcUpload"
+                            id="mediaEditviewSrcUpload" />
+                        <label class="mwf-material-altinput mwf-imgbutton mwf-img-camera"
+                            for="mediaEditviewSrcUpload"></label>
                     </fieldset>
                     {{#if item.mediaType == 'video'}}
                     <video controls="controls" class="my-preview" src="{{#if item.created}}{{item.src}}{{/if}}"></video>
