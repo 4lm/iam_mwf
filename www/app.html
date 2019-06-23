@@ -31,6 +31,8 @@
 <body data-mwf-application="MyApplication" class="mwf-loading-app">
 
     <!-- TODO-REPEATED: add new views here -->
+
+    <!-- Listview -->
     <div class="mwf-view mwf-view-initial" data-mwf-viewcontroller="ListviewViewController" id="mediaOverview">
         <header>
             <button class="mwf-imgbutton mwf-img-sandwich mwf-left-align" id="deleteIndexedDB"></button>
@@ -41,13 +43,24 @@
             <ul class="mwf-listview" data-mwf-listitem-view="myapp-listitem" data-mwf-listitem-menu="meditaItemMenu">
                 <li class="mwf-listitem mwf-li-title-subtitle mwf-template mwf-databind"
                     data-mwf-templatename="myapp-listitem" data-mwf-targetview="mediaReadview">
-                    <img class="mwf-left-align" src="{{src}}?t={{_id}}">
-                    <div class="mwf-li-titleblock mwf-right-fill">
-                        <h2>{{title}} {{_id}}</h2>
+                    {{#if mediaType == 'video'}}
+                    <video class="my-listview-video" src="{{src}}"></video>
+                    <button id="my-listview-playbutton" class="mwf-left-align mwf-imgbutton mwf-img-play-button"></button>
+                    <div class="my-listview-titleblock mwf-li-titleblock mwf-right-fill">
+                        <h2 class="my-no-wrap">{{title}} {{_id}}</h2>
                         <h3>{{addedDateString}}</h3>
                     </div>
                     <button
-                        class="mwf-imgbutton mwf-img-options-vertical mwf-right-align mwf-listitem-menu-control"></button>
+                    class="my-listview-options-vertical mwf-imgbutton mwf-img-options-vertical mwf-right-align mwf-listitem-menu-control"></button>
+                    {{else}}
+                    <img class="mwf-left-align" src="{{src}}?t={{_id}}" />
+                    <div class="mwf-li-titleblock mwf-right-fill">
+                        <h2 class="my-no-wrap">{{title}} {{_id}}</h2>
+                        <h3>{{addedDateString}}</h3>
+                    </div>
+                    <button
+                    class="mwf-imgbutton mwf-img-options-vertical mwf-right-align mwf-listitem-menu-control"></button>
+                    {{/if}}
                 </li>
             </ul>
         </main>
@@ -57,6 +70,7 @@
         </footer>
     </div>
 
+    <!-- Menu on mediaItem -->
     <div data-mwf-templatename="meditaItemMenu" class="mwf-listitem-menu mwf-template mwf-databind mwf-dialog
          mwf-popup">
         <header>
@@ -65,11 +79,12 @@
         <main>
             <ul>
                 <li class="mwf-li-singletitle mwf-menu-item" data-mwf-targetaction="deleteItemDialog">Löschen</li>
-                <li class="mwf-li-singletitle mwf-menu-item" data-mwf-targetview="mediaEditview">Editieren</li>
+                <li class="mwf-li-singletitle mwf-menu-item" data-mwf-targetaction="editItemDialog">Editieren</li>
             </ul>
         </main>
     </div>
 
+    <!-- Dialog on mediaItem -->
     <div class="mwf-dialog mwf-popup mwf-template mwf-databind mwf-view-component"
         data-mwf-viewcontroller="GenericDialogTemplateViewController" data-mwf-templatename="mediaItemDialog">
         <main>
@@ -89,15 +104,24 @@
         </main>
     </div>
 
+    <!-- Readview -->
     <div class="mwf-view" id="mediaReadview" data-mwf-viewcontroller="ReadviewViewController">
         <div class="mwf-template mwf-databind" data-mwf-templatename="mediaReadviewTemplate">
             <header>
                 <button class="mwf-imgbutton mwf-img-sandwich mwf-left-align"></button>
                 <h1 class="mwf-left-align mwf-right-fill my-long-word-header">{{item.title}}</h1>
                 <button class="mwf-imgbutton mwf-img-delete mwf-right-align" on-click="deleteItem"></button>
+                <button class="mwf-imgbutton mwf-img-pencil mwf-right-align" on-click="editItem"></button>
             </header>
             <main class="mwf-scrollview">
-                <img src="{{item.src}}?t={{item._id}}" />
+                {{#if item.mediaType == 'video'}}
+                <video class="my-readview-video" controls="controls"
+                    src="{{#if item.created}}{{item.src}}{{/if}}"></video>
+                {{else}}
+                <img src="{{#if item.created}}{{item.src}}?t={{item._id}}{{/if}}" />
+                {{/if}}
+                <div class="my-description">{{#if item.description}}{{item.description}}{{else}}Kein Beschreibungstext
+                    vorhanden.{{/if}}</div>
             </main>
             <footer>
                 <button class="mwf-back mwf-imgbutton mwf-img-backward"></button>
@@ -105,6 +129,7 @@
         </div>
     </div>
 
+    <!-- Editview -->
     <div class="mwf-view" id="mediaEditview" data-mwf-viewcontroller="EditviewViewController">
         <div class="mwf-template mwf-databind" data-mwf-templatename="mediaEditviewTemplate">
             <header>
@@ -119,9 +144,12 @@
                 <form id="mediaEditForm">
                     <fieldset class="mwf-material">
                         <legend>URL</legend>
-                        <input pattern="http://.*|https://.*|blob:.*|content/.*" type="text" name="url" required="required" value="{{item.src}}" class="mwf-material-altinput-target" />
-                        <input class="mwf-material-altinput" type="file" accept="image/*,video/*" name="srcUpload" id="mediaEditviewSrcUpload" />
-                        <label class="mwf-material-altinput mwf-imgbutton mwf-img-camera" for="mediaEditviewSrcUpload"></label>
+                        <input pattern="http://.*|https://.*|blob:.*|content/.*" type="text" name="url"
+                            required="required" value="{{item.src}}" class="mwf-material-altinput-target" />
+                        <input class="mwf-material-altinput" type="file" accept="image/*,video/*" name="srcUpload"
+                            id="mediaEditviewSrcUpload" />
+                        <label class="mwf-material-altinput mwf-imgbutton mwf-img-camera"
+                            for="mediaEditviewSrcUpload"></label>
                     </fieldset>
                     {{#if item.mediaType == 'video'}}
                     <video controls="controls" class="my-preview" src="{{#if item.created}}{{item.src}}{{/if}}"></video>
@@ -144,6 +172,7 @@
         </div>
     </div>
 
+    <!-- Delete dialog on mediaItem -->
     <div class="mwf-dialog mwf-popup mwf-template mwf-databind mwf-view-component"
         data-mwf-viewcontroller="GenericDialogTemplateViewController" data-mwf-templatename="mediaItemDeleteDialog">
         <main>
@@ -157,6 +186,7 @@
         </main>
     </div>
 
+    <!-- Delete dialog on IndexedDB -->
     <div class="mwf-dialog mwf-popup mwf-template mwf-databind mwf-view-component"
         data-mwf-viewcontroller="GenericDialogTemplateViewController" data-mwf-templatename="deleteIndexedDBDialog">
         <main>

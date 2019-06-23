@@ -43,16 +43,7 @@ export default class ListviewViewController extends mwf.ViewController {
 
         // Create and add new media item
         this.addNewMediaItemElement = this.root.querySelector("#addNewMediaItem");
-        this.addNewMediaItemElement.onclick = (() => {
-            // this.crudops
-            // .create(new entities.MediaItem(
-            //         "m",
-            //         "https://placeimg.com/100/100/city"))
-            // .then((created) => this.addToListview(created));
-            // this.createNewItem();
-            this.nextView("mediaEditview");
-        });
-
+        this.addNewMediaItemElement.onclick = (() => this.nextView("mediaEditview"));
 
         // Delete IndexedDB
         this.deleteIndexedDBElement = this.root.querySelector("#deleteIndexedDB");
@@ -65,9 +56,20 @@ export default class ListviewViewController extends mwf.ViewController {
             }
         });
 
-        // this.crudops.readAll().then((items) => {
-        //     this.initialiseListview(items);
-        // });
+        this.addListener(
+            new mwf.EventMatcher("crud", "created", "MediaItem"),
+            ((event) => this.addToListview(event.data))
+        );
+
+        this.addListener(
+            new mwf.EventMatcher("crud", "updated", "MediaItem"),
+            ((event) => this.updateInListview(event.data._id, event.data))
+        );
+
+        this.addListener(
+            new mwf.EventMatcher("crud", "deleted", "MediaItem"),
+            ((event) => this.removeFromListview(event.data))
+        );
 
         entities.MediaItem.readAll().then((items) => {
             this.initialiseListview(items);
@@ -78,29 +80,9 @@ export default class ListviewViewController extends mwf.ViewController {
     }
 
     /*
-     * for views with listviews: bind a list item to an item view
-     * TODO: delete if no listview is used or if databinding uses ractive templates
-     */
-    // bindListItemView(viewid, itemview, item) {
-    //     // TODO: implement how attributes of item shall be displayed in itemview
-    //     const added = new Date(item.added).toLocaleDateString('de-DE', dateOptions);
-    //     itemview.root.querySelector("h2").textContent = item.title + item._id;
-    //     itemview.root.getElementsByTagName("h3")[0].textContent = added;
-    //     itemview.root.querySelector("img").src = item.src;
-    // }
-
-    /*
-     * for views with listviews: react to the selection of a listitem
-     * TODO: delete if no listview is used or if item selection is specified by targetview/targetaction
-     */
-    // onListItemSelected(listitem, listview) {
-    //     // TODO: implement how selection of listitem shall be handled
-    //     this.nextView("mediaReadview", { item: listitem });
-    // }
-
-    /*
      * for views with listviews: react to the selection of a listitem menu option
-     * TODO: delete if no listview is used or if item selection is specified by targetview/targetaction
+     * TODO: delete if no listview is used or if item selection is specified
+     * by targetview/targetaction
      */
     onListItemMenuItemSelected(option, listitem, listview) {
         // TODO: implement how selection of option for listitem shall be handled
@@ -109,7 +91,8 @@ export default class ListviewViewController extends mwf.ViewController {
 
     /*
      * for views with dialogs
-     * TODO: delete if no dialogs are used or if generic controller for dialogs is employed
+     * TODO: delete if no dialogs are used or
+     * if generic controllerfor dialogs is employed
      */
     bindDialog(dialogid, dialog, item) {
         // call the supertype function
@@ -119,32 +102,8 @@ export default class ListviewViewController extends mwf.ViewController {
     }
 
     /*
-     * for views that initiate transitions to other views
+     * Dialog that appears after hitting "Löschen" in item action menu
      */
-    async onReturnFromSubview(subviewid, returnValue, returnStatus) {
-        // TODO: check from which view, and possibly with which status, we are returning, and handle returnValue accordingly
-        if (subviewid == "mediaReadview") {
-            if (returnStatus == "deleted" && returnValue) {
-                this.removeFromListview(returnValue.deletedItem._id);
-            }
-        } else if (subviewid == "mediaEditview") {
-            if (returnStatus == "created" && returnValue) {
-                this.addToListview(returnValue.item);
-            } else if (returnStatus == "updated" && returnValue) {
-                this.updateInListview(returnValue.item._id, returnValue.item);
-            } else if (returnStatus == "deleted" && returnValue) {
-                this.removeFromListview(returnValue.deletedItem._id);
-            }
-        }
-    }
-
-    deleteItem(item) {
-        // this.crudops.delete(item._id).then(() => {
-        //     this.removeFromListview(item._id);
-        // });
-        item.delete().then(() => this.removeFromListview(item._id));
-    }
-
     deleteItemDialog(item) {
         this.showDialog("mediaItemDeleteDialog", {
             item: item,
@@ -153,24 +112,22 @@ export default class ListviewViewController extends mwf.ViewController {
                     this.hideDialog();
                 }),
                 deleteItem: ((event) => {
-                    this.deleteItem(item);
-                    this.hideDialog();
-                    entities.MediaItem.readAll().then(items => this.initialiseListview(items));
+                    item.delete().then(() => this.hideDialog());
                 })
             }
         })
     }
 
-    editItem(item) {
+    /*
+     * Dialog that appears after hitting "Editieren" in item action menu
+     */
+    editItemDialog(item) {
         this.showDialog("mediaItemDialog", {
             item: item,
             actionBindings: {
                 submitForm: ((event) => {
                     event.original.preventDefault();
-                    item.update().then(() => {
-                        this.updateInListview(item._id, item);
-                    });
-                    this.hideDialog();
+                    item.update().then(() => this.hideDialog());
                 }),
                 deleteItem: ((event) => {
                     this.deleteItemDialog(item);
@@ -179,21 +136,10 @@ export default class ListviewViewController extends mwf.ViewController {
         })
     }
 
-    // createNewItem() {
-    //     const url = "https://placeimg.com/300/400/city";
-    //     const newItem = new entities.MediaItem("", url);
-    //     this.showDialog("mediaItemDialog", {
-    //         item: newItem,
-    //         actionBindings: {
-    //             submitForm: ((event) => {
-    //                 event.original.preventDefault();
-    //                 newItem.create().then(() => this.addToListview(newItem));
-    //                 this.hideDialog();
-    //             })
-    //         }
-    //     });
-    // }
-
+    /*
+     * Dialog that appears after hitting the hamburger button,
+     * if scope is local
+     */
     deleteIndexedDBDialog(dbname) {
         this.showDialog("deleteIndexedDBDialog", {
             dbname: dbname,

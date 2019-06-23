@@ -38,40 +38,36 @@ export default class ReadviewViewController extends mwf.ViewController {
                     }),
                     deleteItem: ((event) => {
                         this.hideDialog();
-                        mediaItem.delete().then(() => {
-                            this.previousView({ deletedItem: mediaItem }, "deleted");
-                        });
+                        mediaItem.delete().then(() => this.previousView());
                     })
                 }
             })
         }));
 
+        this.viewProxy.bindAction("editItem", (() => {
+            this.nextView("mediaEditview", this.args);
+        }));
+
+        this.addListener(
+            new mwf.EventMatcher("crud","deleted","MediaItem"),
+            ((event) => this.markAsObsolete()),
+            true
+        );
+
+        this.preview = this.root.querySelector("main .my-readview-video");
+        console.log("preview", this.preview);
+
         // call the superclass once creation is done
         super.oncreate();
     }
 
-    /*
-     * for views with listviews: bind a list item to an item view
-     * TODO: delete if no listview is used or if databinding uses ractive templates
-     */
-    bindListItemView(viewid, itemview, item) {
-        // TODO: implement how attributes of item shall be displayed in itemview
-    }
+    async onpause() {
 
-    /*
-     * for views with listviews: react to the selection of a listitem
-     * TODO: delete if no listview is used or if item selection is specified by targetview/targetaction
-     */
-    onListItemSelected(listitem, listview) {
-        // TODO: implement how selection of listitem shall be handled
-    }
+        if (this.preview && this.preview.tagName == "VIDEO" && !this.preview.paused && !this.preview.ended) {
+            this.preview.pause();
+        }
 
-    /*
-     * for views with listviews: react to the selection of a listitem menu option
-     * TODO: delete if no listview is used or if item selection is specified by targetview/targetaction
-     */
-    onListItemMenuItemSelected(option, listitem, listview) {
-        // TODO: implement how selection of option for listitem shall be handled
+        super.onpause();
     }
 
     /*
@@ -90,6 +86,11 @@ export default class ReadviewViewController extends mwf.ViewController {
      */
     async onReturnFromSubview(subviewid, returnValue, returnStatus) {
         // TODO: check from which view, and possibly with which status, we are returning, and handle returnValue accordingly
+        if (subviewid == "mediaEditview") {
+            if (returnStatus == "updated" && returnValue) {
+                this.viewProxy.update(returnValue);
+            }
+        }
     }
 
 }

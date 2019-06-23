@@ -34,6 +34,11 @@
     line-height: 40px;
 }
 
+.my-description {
+    padding: 10px;
+    font-size: 14pt;
+}
+
 .my-long-word-header {
     padding-left: 10px;
     max-width: calc(100% - 100px);
@@ -43,4 +48,49 @@
 
 .my-long-word-dialog {
     overflow: hidden;
+}
+
+#my-listview-playbutton {
+    position: relative;
+    margin: 5px;
+    left: -50px;
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    opacity: 0.7;
+}
+
+.my-listview-titleblock {
+    position: relative;
+    left: -50px;
+    min-width: calc(100% - 100px);
+    min-width: -webkit-calc(100% - 100px);
+}
+
+.my-listview-options-vertical {
+    position: relative;
+    left: -50px;
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+}
+
+.my-listview-video {
+    border-radius: 1px;
+    overflow: hidden;
+    object-fit: cover;
+    min-width: 50px;
+    min-height: 50px;
+    max-width: 50px;
+    max-height: 50px;
+}
+
+.my-no-wrap {
+    white-space: nowrap;
+}
+
+.my-readview-video {
+    width: 100%;
 }
