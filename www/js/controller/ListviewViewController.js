@@ -3,6 +3,7 @@
  */
 import { mwf } from "../Main.js";
 import { entities } from "../Main.js";
+import { mwfUtils } from "../Main.js";
 
 
 export default class ListviewViewController extends mwf.ViewController {
@@ -26,7 +27,7 @@ export default class ListviewViewController extends mwf.ViewController {
         this.currentCRUDScopeInfo.innerHTML = this.application.currentCRUDScope;
 
         // Add CRUD scope (local|remote) switcher 
-        this.switchCRUDElement = this.root.querySelector("footer .mwf-img-refresh");
+        this.switchCRUDElement = this.root.querySelector("#switchCRUDElement");
         this.switchCRUDElement.onclick = () => {
             const scope = this.application.currentCRUDScope;
             const local = this.application.CRUDOPS.LOCAL;
@@ -40,6 +41,20 @@ export default class ListviewViewController extends mwf.ViewController {
             }
             entities.MediaItem.readAll().then(items => this.initialiseListview(items));
         }
+
+        // Callback method for toggeling to the correct element
+        function toggleCorrectElement(isServerOnline) {
+            if (isServerOnline == true) {
+                const offlineIndicator = document.getElementById("offlineIndicator");
+                offlineIndicator.style.display = "none";
+            } else {
+                const switchCRUDElement = document.getElementById("switchCRUDElement");
+                switchCRUDElement.style.display = "none";
+            }
+        }
+
+        // Check if connection to Webserver exists and act accordingly
+        mwfUtils.isWebserverAvailable(toggleCorrectElement);
 
         // Create and add new media item
         this.addNewMediaItemElement = this.root.querySelector("#addNewMediaItem");
