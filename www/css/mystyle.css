@@ -37,6 +37,7 @@
 .my-description {
     padding: 10px;
     font-size: 12pt;
+    overflow: hidden;
 }
 
 .my-long-word-header {
