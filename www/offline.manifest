@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# 2019-06-23:v3
+# 2019-06-23:v4
 
 CACHE:
 app.html
@@ -44,10 +44,11 @@ NETWORK:
 api
 content
 available
-http://placeimg.com/300/400
-http://placeimg.com/300/400?
-http://placeimg.com/300/400/city
-http://placeimg.com/300/400/city?
+http://placeimg.com/
+http://lorempixel.com/
+# Only, if MWF app is served via HTTPS:
+https://placeimg.com/
+https://lorempixel.com/
 
 FALLBACK:
 # none
