@@ -34,6 +34,16 @@
     line-height: 40px;
 }
 
+#offlineIndicator {
+    display: inline-block;
+    font-size: 12pt;
+    font-weight: normal;
+    padding-right: 10px;
+    height: 40px;
+    line-height: 40px;
+    color: rgb(255, 127, 127);
+}
+
 .my-description {
     padding: 10px;
     font-size: 12pt;
