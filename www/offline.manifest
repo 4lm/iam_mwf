@@ -46,7 +46,7 @@ content
 available
 http://placeimg.com/
 http://lorempixel.com/
-# Only, if MWF app is served via HTTPS:
+# Only works, if MWF app is served via HTTPS:
 https://placeimg.com/
 https://lorempixel.com/
 
