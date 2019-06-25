@@ -40,7 +40,6 @@ export default class EditviewViewController extends mwf.ViewController {
                     deleteItem: ((event) => {
                         this.hideDialog();
                         this.mediaItem.delete().then(() => {
-                            this.notifyListeners(new mwf.Event("crud", "deleted", "MediaItem", this.mediaItem._id));
                             this.previousView();
                         });
                     })
@@ -85,7 +84,6 @@ export default class EditviewViewController extends mwf.ViewController {
                 xhreq.send(data);
                 xhreq.onreadystatechange = () => {
                     if (xhreq.readyState == 4 && xhreq.status == 200) {
-                        // alert("uploaded: " + xhreq.responseText);
                         const responsedata = JSON.parse(xhreq.responseText);
                         this.mediaItem.src = responsedata.data.srcUpload;
                         this.createOrEditMediaItem();
@@ -116,7 +114,6 @@ export default class EditviewViewController extends mwf.ViewController {
         // If mediaItem already exists, then update.
         if (this.mediaItem.created) {
             this.mediaItem.update().then(() => {
-                this.notifyListeners(new mwf.Event("crud", "updated", "MediaItem", this.mediaItem._id));
                 this.previousView({ item: this.mediaItem }, "updated");
             });
         }
