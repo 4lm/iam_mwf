@@ -69,23 +69,24 @@ textarea {
     position: relative;
     margin: 5px;
     left: -50px;
-    min-width: 40px;
-    min-height: 40px;
-    max-width: 40px;
-    max-height: 40px;
+    top: 15px;
+    min-width: 25px;
+    min-height: 25px;
+    max-width: 25px;
+    max-height: 25px;
     opacity: 0.7;
 }
 
 .my-listview-titleblock {
     position: relative;
-    left: -50px;
+    left: -35px;
     min-width: calc(100% - 100px);
     min-width: -webkit-calc(100% - 100px);
 }
 
 .my-listview-options-vertical {
     position: relative;
-    left: -50px;
+    left: -35px;
     min-width: 40px;
     min-height: 40px;
     max-width: 40px;
