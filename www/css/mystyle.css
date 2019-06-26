@@ -1,5 +1,9 @@
 /* TODO: add any application specific styling here */
 
+textarea {
+    resize: none;
+}
+
 #mediaOverview main ul li img {
     object-fit: cover;
 }
