@@ -9,7 +9,7 @@ This repo is the same repo as for ESA 2, which can be found under [this release]
 ## Repo
 
 You can find the Git-repository of this project at: 
-[github.com/4lm/iam_esa1](https://github.com/4lm/iam_mwf)
+[github.com/4lm/iam_mwf](https://github.com/4lm/iam_mwf)
 
 ## Run dev server
 
