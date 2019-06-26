@@ -22,6 +22,7 @@ textarea {
 #mediaEditview main .my-preview {
     margin-left: 2px;
     padding-left: 10px;
+    width: calc(100% - 28px);
 }
 
 #mediaEditview main video {
